@@ -347,6 +347,172 @@
   border-bottom: 2px solid rgba(255,255,255,0.4);
   padding-bottom: 5px;
 }
+.project-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  border-radius: 15px;
+  padding: 20px 25px;
+  box-shadow: 0 8px 15px rgba(0, 114, 255, 0.4);
+  min-width: 280px;
+  flex: 1 1 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+  user-select: none;
+}
+
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 114, 255, 0.7);
+}
+
+.project-logo {
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  object-fit: contain;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
+}
+
+
+
+.project-content h3 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  padding-bottom: 6px;
+}
+
+.project-content p {
+  font-size: 1rem;
+  color: #e0eaffcc;
+  line-height: 1.4;
+}
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.education-item {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  padding: 15px 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.education-item:hover {
+  transform: translateY(-6px);
+}
+
+.education-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 18px;
+  margin-right: 25px;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  padding: 12px;
+}
+
+
+.education-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+  color: var(--accent-color);
+}
+
+.education-info p {
+  font-size: 1rem;
+  color: var(--text-color);
+  opacity: 0.8;
+}
+#about-me-section {
+  max-width: 900px;
+  margin: 50px auto;
+  background: #cce5ff; /* Light blue background */
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: dropDown 0.8s ease forwards;
+  animation-delay: 0.2s;
+  font-family: 'Arial', sans-serif;
+  color: #003366; /* Dark blue text */
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.about-photo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.about-photo img {
+  width: 100%;
+  max-width: 350px; /* Bigger photo */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
+  object-fit: cover;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #002244; /* Darker navy blue */
+}
+
+.about-text p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+@keyframes dropDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 700px) {
+  .about-container {
+    flex-direction: column;
+  }
+  
+  .about-photo img {
+  width: 100%;
+  max-width: 450px; /* Larger photo */
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
+  object-fit: cover;
+}
+
+}
+
+
+
+
+
 
   </style>
 </head>
@@ -357,16 +523,61 @@
     <i data-lucide="moon" id="theme-icon"></i>
   </button>
 
-  <header>
-    <img src="profile.jpg" alt="Kanan Pandit" class="profile-pic"/>
-    <h1>Kanan Pandit</h1>
-    <p class="subtitle">M.Sc in Big Data Analytics — B.Sc in Mathematics</p>
-  </header>
+  <header class="animated-header">
+  <h1>Hi There,</h1>
+  <h2>I'm Kanan Pandit </h2>
+  <h3>Welcome to My Portfolio</h3>
+</header>
+
+<style>
+  header.animated-header {
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  header.animated-header h1,
+  header.animated-header h2,
+  header.animated-header h3 {
+    opacity: 0;
+    transform: translateY(20px);
+    animation-fill-mode: forwards;
+  }
+
+  header.animated-header h1 {
+    animation: fadeSlideUp 1s ease forwards;
+    animation-delay: 0.3s;
+    font-size: 3rem;
+    color: var(--accent-color);
+  }
+
+  header.animated-header h2 {
+    animation: fadeSlideUp 1s ease forwards;
+    animation-delay: 1.2s;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+  }
+  header.animated-header h3 {
+    animation: fadeSlideUp 1s ease forwards;
+    animation-delay: 1.6s;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+  }
+
+  @keyframes fadeSlideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
 
   <nav>
     <ul>
+      <li><a href="#About Me">About Me</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#introduction">Intro</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -376,10 +587,27 @@
     </ul>
   </nav>
 
-  <div class="welcome-message">Welcome to My Portfolio</div>
-  <div class="color-beam"></div>
+  <!-- <div class="welcome-message">Welcome to My Portfolio</div>
+  <div class="color-beam"></div> -->
 
-  <section id="contact" class="tilt">
+  
+  
+
+  <section id="about-me-section">
+  <div class="about-container">
+    <div class="about-photo">
+      <img src="profile.jpg" alt="My Photo" />
+    </div>
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>
+        I’m pursuing M.Sc. in Big Data Analytics at RKMVERI with a background in Mathematics. Passionate about machine learning, deep learning, and solving real-world problems using data.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="tilt">
     <h2>Contact</h2>
     <ul>
       <li>Email: <a href="mailto:kananpandit02@gmail.com">kananpandit02@gmail.com</a></li>
@@ -387,40 +615,96 @@
       <li>GitHub: <a href="https://github.com/kananpandit02" target="_blank">github.com/kananpandit02</a></li>
       <li>Phone: +91 7384661310</li>
     </ul>
-    <a class="download-btn" href="KananPandit_Resume.pdf" download>Download CV</a>
+    <a class="download-btn" href="KananPandit_Resume.pdf" download>Resume</a>
   </section>
 
-  <div class="color-beam"></div>
 
-  <section id="introduction" class="tilt">
-    <h2>Introduction</h2>
-    <p>I’m pursuing M.Sc. in Big Data Analytics at RKMVERI with a background in Mathematics. Passionate about machine learning, deep learning, and solving real-world problems using data.</p>
-  </section>
 
   <div class="color-beam"></div>
 
   <section id="education" class="tilt">
-    <h2>Education</h2>
-    <ul class="timeline">
-      <li><strong>M.Sc in Big Data Analytics</strong> — RKMVERI, CGPA: 7.26</li>
-      <li><strong>B.Ed (Math)</strong> — WBUTTEPA</li>
-      <li><strong>B.Sc in Mathematics</strong> — Vidyasagar Univ, CGPA: 6.85</li>
-      <li><strong>12th</strong> — 78.20%</li>
-      <li><strong>10th</strong> — 68.42%</li>
-    </ul>
-  </section>
+  <h2>Education</h2>
+  <div class="education-list">
+    <div class="education-item">
+      <img src="rkmveri_logo.png" alt="RKMVERI" class="education-logo" />
+      <div class="education-info">
+        <h3>M.Sc in Big Data Analytics</h3>
+        <p>RKMVERI, CGPA: 7.26</p>
+      </div>
+    </div>
+    <div class="education-item">
+      <img src="wbuttepa_logo.png" alt="WBUTTEPA" class="education-logo" />
+      <div class="education-info">
+        <h3>B.Ed (Math)</h3>
+        <p>WBUTTEPA</p>
+      </div>
+    </div>
+    <div class="education-item">
+      <img src="vidyasagar_logo.png" alt="Vidyasagar University" class="education-logo" />
+      <div class="education-info">
+        <h3>B.Sc in Mathematics</h3>
+        <p>Vidyasagar Univ, CGPA: 6.85</p>
+      </div>
+    </div>
+    <div class="education-item">
+      <img src="12th_logo.png" alt="12th Board" class="education-logo" />
+      <div class="education-info">
+        <h3>12th</h3>
+        <p>78.20%</p>
+      </div>
+    </div>
+    <div class="education-item">
+      <img src="10th_logo.png" alt="10th Board" class="education-logo" />
+      <div class="education-info">
+        <h3>10th</h3>
+        <p>68.42%</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <div class="color-beam"></div>
 
   <section id="projects" class="tilt">
-    <h2>Academic Projects</h2>
-    <ul class="timeline">
-      <li><strong>Adversarial Attacks on BERT</strong></li>
-      <li><strong>Distributed ML with H2O</strong></li>
-      <li><strong>Sketch-to-Image Generation</strong></li>
-      <li><strong>EMNIST Classification</strong></li>
-    </ul>
-  </section>
+  <h2>Academic Projects</h2>
+  <div class="project-boxes">
+
+    <div class="project-item">
+      <img src="https://img.icons8.com/color/48/000000/bert.png" alt="Adversarial Attacks on BERT logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>Adversarial Attacks on BERT</h3>
+        <p>Explored vulnerabilities in BERT models by crafting adversarial examples to test robustness.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <img src="https://img.icons8.com/color/48/000000/hadoop.png" alt="Distributed ML with H2O logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>Distributed ML with H2O</h3>
+        <p>Implemented scalable machine learning pipelines using H2O framework for big data analytics.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <img src="https://img.icons8.com/color/48/000000/deep-learning.png" alt="Sketch-to-Image Generation logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>Sketch-to-Image Generation</h3>
+        <p>Developed a deep learning model to convert hand-drawn sketches into realistic images.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <img src="https://img.icons8.com/color/48/000000/neural-network.png" alt="EMNIST Classification logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>EMNIST Classification</h3>
+        <p>Built and trained neural networks to classify handwritten characters from the EMNIST dataset.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
   <div class="color-beam"></div>
 
@@ -481,7 +765,7 @@
     <h2>Additional Skills & Hobbies</h2>
   <div class="additional-boxes">
     <div class="additional-item"><strong>Languages:</strong> English, Bengali, Hindi</div>
-    <div class="additional-item"><strong>Hobbies:</strong> Cricket, Music</div>
+    <div class="additional-item"><strong>Hobbies:</strong> Cricket, Listening Music</div>
   </div>
   </section>
 
