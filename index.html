@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanan Pandit - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Vanta.js & Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f2027;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    #vanta-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -10;
+    }
+
+  header {
+  text-align: center;
+  padding: 60px 20px;
+  background-attachment: fixed;
+  background-size: 200% auto;   /* Make background twice as wide */
+  background-position: 0% center;  /* Start position */
+  background-image: url('https://i.ibb.co/39VFzTtF/istockphoto-1186776215-612x612.jpg');
+  animation: backgroundMove 30s linear infinite;
+}
+
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+
+
+    .profile-pic {
+      width: 150px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #ccc;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #00f2fe;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+      margin: 0 auto;
+      max-width: 80%;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      padding: 15px 0;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background: #00f2fe;
+      color: #000;
+    }
+
+   .welcome-message {
+  max-width: 900px;
+  margin: 40px auto 60px;
+  padding: 30px 20px;
+  text-align: center;
+  color: #00f2fe;
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: url('https://www.transparenttextures.com/patterns/cubes.png') repeat;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #00f2fe;
+  animation: typewriter 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+}
+    .color-beam {
+      height: 10px;
+      background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc);
+      box-shadow: 0 0 15px 5px rgba(255, 0, 204, 0.5);
+      margin: 40px 0;
+      border-radius: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .color-beam.animated::before {
+      content: "";
+      position: absolute;
+      top: 0; left: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff00cc, #3333ff, #00ffcc, #ff00cc);
+      animation: beamMove 3s linear infinite;
+      opacity: 0.6;
+      z-index: 0;
+      border-radius: 50px;
+    }
+
+    @keyframes beamMove {
+      0% { left: -50%; }
+      100% { left: 0%; }
+    }
+
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    section:nth-child(even) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #00f2fe;
+      margin-bottom: 20px;
+    }
+
+    section p, section ul li {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #e0e0e0;
+    }
+
+    section ul {
+      padding-left: 20px;
+    }
+
+    #projects ul li {
+      transition: transform 0.3s ease, background 0.3s ease;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    #projects ul li:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.03);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Moving 3D Background -->
+  <div id="vanta-bg"></div>
+
+  <header>
+    <img src="profile.jpg" alt="Kanan Pandit" class="profile-pic" />
+    <h1>Kanan Pandit</h1>
+    <p class="subtitle">M.Sc in Big Data Analytics — B.Sc in Mathematics</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#introduction">Intro</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#coursework">Coursework</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#additional">More</a></li>
+    </ul>
+  </nav>
+
+  <div class="welcome-message">
+    Welcome to My Portfolio
+  </div>
+
+  <div class="color-beam"></div>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <ul>
+      <li>Email: <a href="mailto:kananpandit02@gmail.com">kananpandit02@gmail.com</a></li>
+      <li>LinkedIn: <a href="https://linkedin.com/in/kananpandit02" target="_blank">linkedin.com/in/kananpandit02</a></li>
+      <li>GitHub: <a href="https://github.com/kananpandit02" target="_blank">github.com/kananpandit02</a></li>
+      <li>Phone: +91 7384661310</li>
+    </ul>
+  </section>
+
+  <div class="color-beam"></div>
+
+  <section id="introduction">
+    <h2>Introduction</h2>
+    <p>I am currently pursuing my M.Sc. in Big Data Analytics at Ramakrishna Mission Vivekananda Educational and Research Institute (RKMVERI). I hold a Bachelor’s degree in Mathematics from Vidyasagar University. With expertise in machine learning, deep learning, statistics, data structures, and computer vision, I aim to build impactful solutions using data science and AI.</p>
+  </section>
+
+  <div class="color-beam"></div>
+
+  <section id="education">
+    <h2>Education</h2>
+    <ul>
+      <li><strong>M.Sc in Big Data Analytics</strong> (RKMVERI, 2024–Present, CGPA: 7.26)</li>
+      <li><strong>B.Ed with Pedagogy of Mathematics</strong> (WBUTTEPA, Kolkata)</li>
+      <li><strong>B.Sc in Mathematics</strong> (Vidyasagar University, 2017–2020, CGPA: 6.85)</li>
+      <li><strong>Higher Secondary (10+2)</strong> (78.20%)</li>
+      <li><strong>Secondary (10)</strong> (68.42%)</li>
+    </ul>
+  </section>
+
+  <div class="color-beam animated"></div>
+
+  <section id="projects">
+    <h2>Academic Projects</h2>
+    <ul>
+      <li><strong>Adversarial Attacks on BERT</strong>: Evaluating FGSM, PGD, TextFooler on sentiment models.</li>
+      <li><strong>Distributed ML with H2O</strong>: Cluster setup and experiments on large-scale data.</li>
+      <li><strong>Sketch-to-Image Generation</strong>: Using deep learning to convert sketches to images.</li>
+      <li><strong>EMNIST Classification</strong>: SVM vs Random Forest comparison.</li>
+    </ul>
+  </section>
+
+  <div class="color-beam animated"></div>
+
+  <section id="skills">
+    <h2>Technical Skills</h2>
+    <ul>
+      <li><strong>Programming:</strong> Python, C, R</li>
+      <li><strong>Tools:</strong> MySQL, Hadoop, Spark, Excel, Power BI</li>
+      <li><strong>Libraries:</strong> NumPy, Pandas, Scikit-learn, PyTorch, Hugging Face</li>
+    </ul>
+  </section>
+
+  <div class="color-beam"></div>
+
+  <section id="coursework">
+    <h2>Coursework</h2>
+    <ul>
+      <li>Probability, Statistics, Time Series, Survival Analysis</li>
+      <li>ML, Deep Learning, NLP, Transformers</li>
+      <li>Big Data: Hadoop, Spark</li>
+      <li>Data Structures and Algorithms</li>
+    </ul>
+  </section>
+
+  <div class="color-beam"></div>
+
+  <section id="interests">
+    <h2>Areas of Interest</h2>
+    <p>Deep Learning, Machine Learning, Computer Vision, Optimization, Distributed Systems</p>
+  </section>
+
+  <div class="color-beam"></div>
+
+  <section id="additional">
+    <h2>Additional Skills & Hobbies</h2>
+    <ul>
+      <li><strong>Languages:</strong> English, Bengali, Hindi</li>
+      <li><strong>Hobbies:</strong> Cricket, Music</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>© 2025 Kanan Pandit</p>
+  </footer>
+
+  <!-- Vanta.js Init Script -->
+  <script>
+    VANTA.NET({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0x00f2fe,
+      backgroundColor: 0x0f2027,
+      points: 10.0,
+      maxDistance: 22.0,
+      spacing: 18.0
+    });
+  </script>
+
+</body>
+</html>
