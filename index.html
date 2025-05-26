@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -239,6 +240,115 @@
       .welcome-message { font-size: 1.5rem; }
       nav ul { flex-direction: column; gap: 10px; align-items: center; }
     }
+    .interest-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.interest-item {
+  background: linear-gradient(135deg, #00c6ff, #0072ff); /* cool blue gradient */
+  color: #fff;
+  font-weight: 600;
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 114, 255, 0.4);
+  font-size: 1.1rem;
+  cursor: default;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.interest-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 114, 255, 0.7);
+}
+.additional-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.additional-item {
+  background: linear-gradient(135deg, #00c6ff, #0072ff); /* same cool blue gradient */
+  color: #fff;
+  font-weight: 600;
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 114, 255, 0.4);
+  font-size: 1.1rem;
+  cursor: default;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.additional-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 114, 255, 0.7);
+}
+.coursework-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.coursework-item {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  font-weight: 600;
+  padding: 15px 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 114, 255, 0.4);
+  font-size: 1.1rem;
+  cursor: default;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coursework-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 114, 255, 0.7);
+}
+.skills-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.skill-group {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 114, 255, 0.4);
+  min-width: 220px;
+  flex: 1 1 250px;
+  cursor: default;
+  user-select: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-group:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 114, 255, 0.7);
+}
+
+.skill-group strong {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  border-bottom: 2px solid rgba(255,255,255,0.4);
+  padding-bottom: 5px;
+}
+
   </style>
 </head>
 <body>
@@ -316,49 +426,113 @@
   <div class="color-beam"></div>
 
   <section id="skills" class="tilt">
-    <h2>Technical Skills</h2>
-    <ul>
-      <li><strong>Languages:</strong> Python, C, R</li>
-      <li><strong>Tools:</strong> MySQL, Hadoop, Spark, Power BI</li>
-      <li><strong>Libraries:</strong> NumPy, Pandas, Scikit-learn, PyTorch</li>
-    </ul>
-  </section>
+  <h2>Technical Skills</h2>
+  <div class="skills-boxes">
+    <div class="skill-group">
+      <strong>Languages:</strong>
+      <p>Python, C, R</p>
+    </div>
+    <div class="skill-group">
+      <strong>Tools:</strong>
+      <p>MySQL, Hadoop, Spark, Power BI</p>
+    </div>
+    <div class="skill-group">
+      <strong>Libraries:</strong>
+      <p>NumPy, Pandas, Scikit-learn, PyTorch</p>
+    </div>
+  </div>
+</section>
+
 
   <div class="color-beam"></div>
 
   <section id="coursework" class="tilt">
-    <h2>Coursework</h2>
-    <ul>
-      <li>Probability, Time Series, Survival Analysis</li>
-      <li>ML, Deep Learning, NLP</li>
-      <li>Hadoop, Spark, Algorithms</li>
-    </ul>
-  </section>
+  <h2>Coursework</h2>
+  <div class="coursework-boxes">
+    <div class="coursework-item">Probability</div>
+    <div class="coursework-item">Time Series</div>
+    <div class="coursework-item">Survival Analysis</div>
+
+    <div class="coursework-item">Machine Learning</div>
+    <div class="coursework-item">Deep Learning</div>
+    <div class="coursework-item">NLP</div>
+    <div class="coursework-item">Data Structure and Algorithms</div>
+    <div class="coursework-item">Hadoop</div>
+    <div class="coursework-item">Spark</div>
+  </div>
+</section>
+
 
   <div class="color-beam"></div>
 
-  <section id="interests" class="tilt">
-    <h2>Areas of Interest</h2>
-    <p>ML, Deep Learning, Computer Vision, Distributed Systems</p>
-  </section>
+  <section id="interests">
+  <h2>Areas of Interest</h2>
+  <div class="interest-boxes">
+    <div class="interest-item">Deep Learning</div>
+    <div class="interest-item">Machine Learning</div>
+    <div class="interest-item">Computer Vision</div>
+    <div class="interest-item">Optimization</div>
+    <div class="interest-item">Distributed Systems</div>
+  </div>
+</section>
 
   <div class="color-beam"></div>
 
   <section id="additional" class="tilt">
     <h2>Additional Skills & Hobbies</h2>
-    <ul>
-      <li><strong>Languages:</strong> English, Bengali, Hindi</li>
-      <li><strong>Hobbies:</strong> Cricket, Music</li>
-    </ul>
+  <div class="additional-boxes">
+    <div class="additional-item"><strong>Languages:</strong> English, Bengali, Hindi</div>
+    <div class="additional-item"><strong>Hobbies:</strong> Cricket, Music</div>
+  </div>
   </section>
 
   <div class="floating-btn" onclick="window.location.href='mailto:kananpandit02@gmail.com'">
     <i data-lucide="mail"></i>
   </div>
 
-  <footer>
-    <p>© 2025 Kanan Pandit</p>
-  </footer>
+ <footer style="background: rgba(255, 255, 255, 0.05); padding: 40px 20px; text-align: center; color: #ccc;">
+  <h3 style="color: #00f2fe; margin-bottom: 20px;">Kanan's Portfolio</h3>
+  <p style="max-width: 600px; margin: auto; font-size: 1rem;">
+    Thank you for visiting my personal portfolio website. Let's connect through social platforms!
+  </p>
+
+  <div style="margin-top: 30px;">
+    <h4 style="color: #00f2fe;">Quick Links</h4>
+    <p>
+      <a href="#contact" style="color: #ccc; margin: 0 10px;">Contact</a> |
+      <a href="#introduction" style="color: #ccc; margin: 0 10px;">Intro</a> |
+      <a href="#education" style="color: #ccc; margin: 0 10px;">Education</a> |
+      <a href="#projects" style="color: #ccc; margin: 0 10px;">Projects</a> |
+      <a href="#skills" style="color: #ccc; margin: 0 10px;">Skills</a> |
+      <a href="#coursework" style="color: #ccc; margin: 0 10px;">Coursework</a>
+    </p>
+  </div>
+
+  <div style="margin-top: 30px;">
+    <h4 style="color: #00f2fe;">Contact Info</h4>
+    <p>📍 Kolkata, India</p>
+    <div style="margin: 10px auto;">
+      <!-- Email -->
+      <a href="mailto:kananpandit02@gmail.com" target="_blank" title="Email" style="margin: 0 10px; display: inline-block;">
+        <img src="https://img.icons8.com/ios-glyphs/30/00f2fe/new-post.png" alt="Email" width="28">
+      </a>
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com/in/kananpandit02" target="_blank" title="LinkedIn" style="margin: 0 10px; display: inline-block;">
+        <img src="https://img.icons8.com/ios-filled/50/00f2fe/linkedin.png" alt="LinkedIn" width="28">
+      </a>
+      <!-- GitHub -->
+      <a href="https://github.com/kananpandit02" target="_blank" title="GitHub" style="margin: 0 10px; display: inline-block;">
+        <img src="https://img.icons8.com/ios-glyphs/30/00f2fe/github.png" alt="GitHub" width="28">
+      </a>
+    </div>
+    <p style="font-size: 0.9rem;">📞 +91 7384661310</p>
+  </div>
+
+  <p style="margin-top: 40px; font-size: 0.9rem; color: #888;">
+    Designed with ❤️ by Kanan Pandit
+  </p>
+</footer>
+
 
   <script>
     VANTA.NET({
