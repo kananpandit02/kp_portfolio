@@ -1067,28 +1067,28 @@
     submitBtn.textContent = "Sending...";
 
   try {
-  const response = await fetch("https://kp-portfolio-de0e.onrender.com", {
+  const response = await fetch("https://kp-portfolio-de0e.onrender.com/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData)
   });
 
-      if (!response.ok) throw new Error("Network response was not ok");
+  if (!response.ok) throw new Error("Network response was not ok");
 
-      // Success message
-      responseEl.textContent = "Thanks! We will contact you later.";
-      responseEl.style.color = "green";
-      responseEl.style.display = "block";
-      form.reset();
-    } catch (error) {
-      responseEl.textContent = "Oops! Something went wrong. Please try again later.";
-      responseEl.style.color = "red";
-      responseEl.style.display = "block";
-      console.error("Error submitting form:", error);
-    } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Send Message";
-    }
+  responseEl.textContent = "Thanks! We will contact you later.";
+  responseEl.style.color = "green";
+  responseEl.style.display = "block";
+  form.reset();
+} catch (error) {
+  responseEl.textContent = "Oops! Something went wrong. Please try again later.";
+  responseEl.style.color = "red";
+  responseEl.style.display = "block";
+  console.error("Error submitting form:", error);
+} finally {
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Send Message";
+}
+
   });
 </script>
 
