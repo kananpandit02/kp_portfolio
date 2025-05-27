@@ -436,86 +436,106 @@
   color: var(--text-color);
   opacity: 0.8;
 }
-#about-me-section {
+ /* Your new animated and styled section */
+  #about-me-section {
   max-width: 900px;
   margin: 50px auto;
-  background: #cce5ff; /* Light blue background */
+  background: #e0f7f7;  /* Teal-like soft background */
   padding: 40px 30px;
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
-  opacity: 0;
-  transform: translateY(-50px);
-  animation: dropDown 0.8s ease forwards;
-  animation-delay: 0.2s;
+  box-shadow: 0 8px 16px rgba(0, 128, 128, 0.3);
   font-family: 'Arial', sans-serif;
-  color: #003366; /* Dark blue text */
+  color: #004d4d;       /* Deep teal text */
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease;
 }
 
-.about-container {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.about-photo {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.about-photo img {
-  width: 100%;
-  max-width: 350px; /* Bigger photo */
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
-  object-fit: cover;
-}
-
-.about-text {
-  flex: 1;
-}
-
-.about-text h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #002244; /* Darker navy blue */
-}
-
-.about-text p {
-  font-size: 1.25rem;
-  line-height: 1.6;
-}
-
-@keyframes dropDown {
-  to {
+  #about-me-section.show {
     opacity: 1;
     transform: translateY(0);
   }
-}
 
-/* Responsive for smaller screens */
-@media (max-width: 700px) {
   .about-container {
-    flex-direction: column;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
   }
-  
+
+  .about-photo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.4s ease;
+  }
+
   .about-photo img {
-  width: 100%;
-  max-width: 450px; /* Larger photo */
-  border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
-  object-fit: cover;
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
+    object-fit: cover;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .about-photo img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 102, 204, 0.5);
+  }
+
+  .about-text {
+    flex: 1;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .about-text.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .about-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #0077ff;
 }
 
-}
 
+  .about-text p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
 
+  @media (max-width: 700px) {
+    .about-container {
+      flex-direction: column;
+      text-align: center;
+    }
 
-
-
-
-  </style>
+    .about-photo img {
+      max-width: 450px;
+    }
+  }
+</style>
 </head>
+  <script>
+    window.addEventListener('scroll', function () {
+      const aboutSection = document.querySelector('#about-me-section');
+      const aboutText = document.querySelector('.about-text');
+      const position = aboutSection.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight / 1.3;
+
+      if (position < screenPosition) {
+        aboutSection.classList.add('show');
+        aboutText.classList.add('show');
+      }
+    });
+  </script>
+</body>
+
 <body>
 
   <div id="vanta-bg"></div>
@@ -773,6 +793,139 @@
     <i data-lucide="mail"></i>
   </div>
 
+
+  <!-- Add this section before the footer -->
+
+<div class="color-beam"></div>
+
+
+ <section id="get-in-touch" style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px;">
+  <div style="flex: 1; min-width: 300px;">
+    <img
+      src="https://i.ibb.co/qYpbBGJW/5124556.jpg"
+      alt="Customer Support Illustration"
+      style="width: 100%; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);"
+    />
+  </div>
+  <div style="flex: 1; min-width: 300px;">
+    <h2>Get in Touch</h2>
+    <form id="contact-form" style="display: flex; flex-direction: column; gap: 15px;" novalidate>
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        required
+        style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Your Email"
+        required
+        style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;"
+      />
+      <input
+        type="tel"
+        name="phone"
+        placeholder="9876543210"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        minlength="10"
+        required
+        title="Please enter exactly 10 digits"
+        style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;"
+      />
+      <textarea
+        name="message"
+        placeholder="Your Message"
+        rows="5"
+        required
+        style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;"
+      ></textarea>
+      <button
+        type="submit"
+        style="
+          padding: 12px;
+          font-size: 1rem;
+          border: none;
+          border-radius: 8px;
+          background: #00f2fe;
+          color: #000;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.3s;
+        "
+      >
+        Send Message
+      </button>
+    </form>
+    <p id="form-response" style="color: green; margin-top: 10px; display: none;"></p>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("contact-form");
+  const responseEl = document.getElementById("form-response");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Clear previous messages
+    responseEl.textContent = "";
+    responseEl.style.display = "none";
+
+    // Check validity and show built-in browser validation UI if invalid
+    if (!form.reportValidity()) return;
+
+    // Prepare data
+    const formData = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      phone: form.phone.value.trim(),
+      message: form.message.value.trim()
+    };
+
+    // Disable button while processing
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    try {
+      const response = await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      // Success message
+      responseEl.textContent = "Thanks! We will contact you later.";
+      responseEl.style.color = "green";
+      responseEl.style.display = "block";
+      form.reset();
+    } catch (error) {
+      responseEl.textContent = "Oops! Something went wrong. Please try again later.";
+      responseEl.style.color = "red";
+      responseEl.style.display = "block";
+      console.error("Error submitting form:", error);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send Message";
+    }
+  });
+</script>
+
+  
+
+
+
+
+
+
+ 
+
+</section>
  <footer style="background: rgba(255, 255, 255, 0.05); padding: 40px 20px; text-align: center; color: #ccc;">
   <h3 style="color: #00f2fe; margin-bottom: 20px;">Kanan's Portfolio</h3>
   <p style="max-width: 600px; margin: auto; font-size: 1rem;">
