@@ -1066,8 +1066,8 @@
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending...";
 
-   try {
-  const response = await fetch("http://192.168.11.147:5000/contact", {
+  try {
+  const response = await fetch("https://your-render-service.onrender.com/contact", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData)
