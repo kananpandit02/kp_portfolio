@@ -424,18 +424,28 @@
   padding: 12px;
 }
 
-
 .education-info h3 {
   font-size: 1.4rem;
   margin-bottom: 6px;
   color: var(--accent-color);
+  font-weight: 700; /* Make degree name bold */
 }
 
+/* Base style for all paragraphs */
 .education-info p {
   font-size: 1rem;
   color: var(--text-color);
   opacity: 0.8;
 }
+
+/* Target the year and status inside p using spans */
+.education-info p span.year,
+.education-info p span.completion-status {
+  font-weight: 700;
+  color: var(--accent-color);
+  opacity: 1; /* make fully opaque for emphasis */
+}
+
  /* Your new animated and styled section */
   #about-me-section {
   max-width: 900px;
@@ -618,13 +628,21 @@
     <div class="about-photo">
       <img src="profile.jpg" alt="My Photo" />
     </div>
-    <div class="about-text">
-      <h2>About Me</h2>
-      <p>
-        I’m pursuing M.Sc. in Big Data Analytics at RKMVERI with a background in Mathematics. Passionate about machine learning, deep learning, and solving real-world problems using data.
-      </p>
-    </div>
-  </div>
+  <div class="about-text">
+  <h2>About Me</h2>
+  <p>
+    <strong>I'm Kanan Pandit</strong><br />
+    <strong>Master's Student in Data Science</strong>
+  </p>
+  <p>
+    I am currently pursuing a Master’s degree in Data Science, with a strong focus on <strong>machine learning</strong>, 
+    <strong>data analytics</strong>, and <strong>AI technologies</strong>. With a solid foundation in 
+    <strong>statistical modeling</strong> and <strong>data manipulation</strong>, I specialize in transforming complex data into 
+    actionable insights. I am passionate about solving real-world problems through innovative, data-driven approaches and 
+    committed to continuous learning.
+  </p>
+</div>
+
 </section>
 
 <section id="contact" class="tilt">
@@ -646,42 +664,64 @@
   <h2>Education</h2>
   <div class="education-list">
     <div class="education-item">
-      <img src="rkmveri_logo.png" alt="RKMVERI" class="education-logo" />
+      <img src="rkmveri_logo.jpg" alt="RKMVERI" class="education-logo" />
       <div class="education-info">
-        <h3>M.Sc in Big Data Analytics</h3>
-        <p>RKMVERI, CGPA: 7.26</p>
+        <h3>Masters of Science in Big Data Analytics</h3>
+        <p>Ramakrishna Mission Vivekanada Educational and Research Institute, Belur</p>
+<p>
+  <span class="year">2024-2026</span> | <span class="completion-status">Pursuing</span>
+</p>
       </div>
     </div>
     <div class="education-item">
-      <img src="wbuttepa_logo.png" alt="WBUTTEPA" class="education-logo" />
+      <img src="wbuttepa_logo.jpg" alt="WBUTTEPA" class="education-logo" />
       <div class="education-info">
-        <h3>B.Ed (Math)</h3>
-        <p>WBUTTEPA</p>
+        <h3>Bachelor of Education With Pedagogy Of Mathematics</h3>
+        <p>WBUTTEPA,Kolkata</p>
+       <p>
+  <span class="year">2020-2022</span> | <span class="completion-status">Completed</span>
+</p>
+
       </div>
     </div>
     <div class="education-item">
-      <img src="vidyasagar_logo.png" alt="Vidyasagar University" class="education-logo" />
+      <img src="Vidyasagar_logo.jpg" alt="Vidyasagar University" class="education-logo" />
       <div class="education-info">
-        <h3>B.Sc in Mathematics</h3>
-        <p>Vidyasagar Univ, CGPA: 6.85</p>
+        <h3>Bachelor of Science in Mathematics</h3>
+        <p>Vidyasagar University,Medinipur</p>
+        <p>
+  <span class="year">2017-2020</span> | <span class="completion-status">Completed</span>
+</p>
       </div>
     </div>
     <div class="education-item">
-      <img src="12th_logo.png" alt="12th Board" class="education-logo" />
+      <img src="10th_logo.jpg" alt="12th Board" class="education-logo" />
       <div class="education-info">
-        <h3>12th</h3>
-        <p>78.20%</p>
+        <h3>Higher Secondary</h3>
+        <p>Golar Sushila Vidyapith High School,Golar,Medinipur</p>
+    <p>
+  <span class="year">2015-2017</span> | <span class="completion-status">Completed</span>
+  </p>
       </div>
     </div>
+
+
     <div class="education-item">
-      <img src="10th_logo.png" alt="10th Board" class="education-logo" />
-      <div class="education-info">
-        <h3>10th</h3>
-        <p>68.42%</p>
+  <img src="10th_logo.jpg" alt="10th Board" class="education-logo" />
+  <div class="education-info">
+    <h3>Secondary Education</h3>
+    <p>Golar Sushila Vidyapith High School,Golar,Medinipur</p>
+    <p><span class="year">2015</span> | <span class="completion-status">Completed</span></p>
+  </div>
+</div>
       </div>
     </div>
   </div>
 </section>
+
+
+
+
 
 
   <div class="color-beam"></div>
@@ -690,39 +730,114 @@
   <h2>Academic Projects</h2>
   <div class="project-boxes">
 
-    <div class="project-item">
-      <img src="https://img.icons8.com/color/48/000000/bert.png" alt="Adversarial Attacks on BERT logo" class="project-logo"/>
+     <div class="project-item">
+      <img src="emnist_logo.png" alt="EMNIST Classification logo" class="project-logo"/>
       <div class="project-content">
-        <h3>Adversarial Attacks on BERT</h3>
-        <p>Explored vulnerabilities in BERT models by crafting adversarial examples to test robustness.</p>
+        <h3>A Comparative Study of Classification Algorithms on the EMNIST dataset</h3>
+        <p>Built and trained neural networks to classify handwritten characters from the EMNIST dataset.</p>
       </div>
     </div>
 
-    <div class="project-item">
-      <img src="https://img.icons8.com/color/48/000000/hadoop.png" alt="Distributed ML with H2O logo" class="project-logo"/>
+ <div class="project-item">
+      <img src="protfolio_logo.png" alt="portfolio logo" class="project-logo"/>
       <div class="project-content">
-        <h3>Distributed ML with H2O</h3>
+        <h3>My Data Science Journey – Interactive Portfolio</h3>
+        <p>Built and trained neural networks to classify handwritten characters from the EMNIST dataset.</p>
+      </div>
+    </div>
+   
+    <div class="project-item">
+      <img src="h2o_logo.png" alt="Distributed ML with Spark logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>Distributed ML with H2O </h3>
         <p>Implemented scalable machine learning pipelines using H2O framework for big data analytics.</p>
       </div>
     </div>
 
     <div class="project-item">
+      <img src="spark_logo.png" alt="Distributed ML with H2O logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>Distributed ML with  SPARK </h3>
+        <p>Implemented scalable machine learning pipelines using H2O framework for big data analytics.</p>
+      </div>
+    </div>
+
+<div class="project-item">
+      <img src="wild_logo.jpg" alt="Distributed ML with H2O logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>Distributed Machine Learning for Wildfire Prediction Using H2O Automl </h3>
+        <p>Implemented scalable machine learning pipelines using H2O framework for big data analytics.</p>
+      </div>
+    </div>
+
+  
+    <!-- <div class="project-item">
       <img src="https://img.icons8.com/color/48/000000/deep-learning.png" alt="Sketch-to-Image Generation logo" class="project-logo"/>
       <div class="project-content">
         <h3>Sketch-to-Image Generation</h3>
         <p>Developed a deep learning model to convert hand-drawn sketches into realistic images.</p>
       </div>
-    </div>
+    </div> -->
 
     <div class="project-item">
-      <img src="https://img.icons8.com/color/48/000000/neural-network.png" alt="EMNIST Classification logo" class="project-logo"/>
+      <img src="hand_logo.png" alt="EMNIST Classification logo" class="project-logo"/>
       <div class="project-content">
-        <h3>EMNIST Classification</h3>
+        <h3>Smart Control Hub:Multi-Functional Virtual Controller using Hand Gestures</h3>
         <p>Built and trained neural networks to classify handwritten characters from the EMNIST dataset.</p>
       </div>
     </div>
 
+   
+
+
+
+    <div class="project-item">
+      <img src="ghibli_logo.jpg" alt="EMNIST Classification logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>Artistic Image Transformation in Ghibli Aesthetic</h3>
+        <p>Built and trained neural networks to classify handwritten characters from the EMNIST dataset.</p>
+      </div>
+    </div>
   </div>
+
+<div class="project-item">
+      <img src="hybrid_logo.png" alt="EMNIST Classification logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>A Comparative Study on Image Filtering and Hybrid Image Generation Algorithm</h3>
+        <p>Built and trained neural networks to classify handwritten characters from the EMNIST dataset.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="project-item">
+      <img src="haris_logo.jpg" alt="EMNIST Classification logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>Detecting Harris Corners and Matching Images</h3>
+        <p>Built and trained neural networks to classify handwritten characters from the EMNIST dataset.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-item">
+      <img src="image_logo.jpg" alt="EMNIST Classification logo" class="project-logo"/>
+      <div class="project-content">
+        <h3>  Image Stitching(Panorama Creation),Image Alignment (Cam-Scanner
+ Style),Depth Estimation from Stereo Images  using OpenCV and  ustom Harris detector without using OpenCV</h3>
+        <p>Built and trained neural networks to classify handwritten characters from the EMNIST dataset.</p>
+      </div>
+    </div>
+  </div>
+
+  
+
+   <div class="project-item">
+      <img src="adv_logo.jpg" alt="Adversarial Attacks on BERT logo" class="project-logo"/>
+      <div class="project-content">
+        <h3> Defending Sentiment Analysis Against Adversarial Attacks: A Step Toward More Reliable NLP Models </h3>
+        <p>Explored vulnerabilities in BERT models by crafting adversarial examples to test robustness.</p>
+      </div>
+    </div>
 </section>
 
 
@@ -789,9 +904,9 @@
   </div>
   </section>
 
-  <div class="floating-btn" onclick="window.location.href='mailto:kananpandit02@gmail.com'">
+  <!-- <div class="floating-btn" onclick="window.location.href='mailto:kananpandit02@gmail.com'">
     <i data-lucide="mail"></i>
-  </div>
+  </div> -->
 
 
   <!-- Add this section before the footer -->
@@ -827,7 +942,7 @@
       <input
         type="tel"
         name="phone"
-        placeholder="9876543210"
+        placeholder="9999999999"
         pattern="[0-9]{10}"
         maxlength="10"
         minlength="10"
@@ -926,48 +1041,50 @@
  
 
 </section>
- <footer style="background: rgba(255, 255, 255, 0.05); padding: 40px 20px; text-align: center; color: #ccc;">
-  <h3 style="color: #00f2fe; margin-bottom: 20px;">Kanan's Portfolio</h3>
-  <p style="max-width: 600px; margin: auto; font-size: 1rem;">
+<footer style="background: linear-gradient(135deg, #1e3c72, #2a5298); padding: 40px 20px; text-align: center; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <h3 style="color: #1de9b6; margin-bottom: 25px; font-weight: 700; font-size: 2.5rem;">Kanan's Portfolio</h3>
+  <p style="max-width: 600px; margin: auto; font-size: 1.3rem; line-height: 1.6;">
     Thank you for visiting my personal portfolio website. Let's connect through social platforms!
   </p>
 
-  <div style="margin-top: 30px;">
-    <h4 style="color: #00f2fe;">Quick Links</h4>
-    <p>
-      <a href="#contact" style="color: #ccc; margin: 0 10px;">Contact</a> |
-      <a href="#introduction" style="color: #ccc; margin: 0 10px;">Intro</a> |
-      <a href="#education" style="color: #ccc; margin: 0 10px;">Education</a> |
-      <a href="#projects" style="color: #ccc; margin: 0 10px;">Projects</a> |
-      <a href="#skills" style="color: #ccc; margin: 0 10px;">Skills</a> |
-      <a href="#coursework" style="color: #ccc; margin: 0 10px;">Coursework</a>
+  <div style="margin-top: 40px;">
+    <h4 style="color: #1de9b6; font-weight: 600; font-size: 1.5rem;">Quick Links</h4>
+    <p style="font-size: 1.1rem;">
+      <a href="#contact" style="color: #bbb; margin: 0 10px; text-decoration: none; transition: color 0.3s;">Contact</a> |
+      <a href="#about-me-section" style="color: #bbb; margin: 0 10px; text-decoration: none; transition: color 0.3s;">About Me</a> |
+      <a href="#education" style="color: #bbb; margin: 0 10px; text-decoration: none; transition: color 0.3s;">Education</a> |
+      <a href="#projects" style="color: #bbb; margin: 0 10px; text-decoration: none; transition: color 0.3s;">Projects</a> |
+      <a href="#skills" style="color: #bbb; margin: 0 10px; text-decoration: none; transition: color 0.3s;">Skills</a> |
+      <a href="#coursework" style="color: #bbb; margin: 0 10px; text-decoration: none; transition: color 0.3s;">Coursework</a>
     </p>
   </div>
 
-  <div style="margin-top: 30px;">
-    <h4 style="color: #00f2fe;">Contact Info</h4>
-    <p>📍 Kolkata, India</p>
-    <div style="margin: 10px auto;">
+  <div style="margin-top: 40px;">
+    <h4 style="color: #1de9b6; font-weight: 600; font-size: 1.5rem;">Contact Info</h4>
+    <p style="font-size: 1.1rem;">📍 Kolkata, India</p>
+    <div style="margin: 15px auto;">
       <!-- Email -->
-      <a href="mailto:kananpandit02@gmail.com" target="_blank" title="Email" style="margin: 0 10px; display: inline-block;">
-        <img src="https://img.icons8.com/ios-glyphs/30/00f2fe/new-post.png" alt="Email" width="28">
+      <a href="mailto:kananpandit02@gmail.com" target="_blank" title="Email" style="margin: 0 15px; display: inline-block; filter: brightness(0.8); transition: filter 0.3s;">
+        <img src="https://img.icons8.com/ios-glyphs/30/1de9b6/new-post.png" alt="Email" width="32" />
       </a>
       <!-- LinkedIn -->
-      <a href="https://linkedin.com/in/kananpandit02" target="_blank" title="LinkedIn" style="margin: 0 10px; display: inline-block;">
-        <img src="https://img.icons8.com/ios-filled/50/00f2fe/linkedin.png" alt="LinkedIn" width="28">
+      <a href="https://linkedin.com/in/kananpandit02" target="_blank" title="LinkedIn" style="margin: 0 15px; display: inline-block; filter: brightness(0.8); transition: filter 0.3s;">
+        <img src="https://img.icons8.com/ios-filled/50/1de9b6/linkedin.png" alt="LinkedIn" width="32" />
       </a>
       <!-- GitHub -->
-      <a href="https://github.com/kananpandit02" target="_blank" title="GitHub" style="margin: 0 10px; display: inline-block;">
-        <img src="https://img.icons8.com/ios-glyphs/30/00f2fe/github.png" alt="GitHub" width="28">
+      <a href="https://github.com/kananpandit02" target="_blank" title="GitHub" style="margin: 0 15px; display: inline-block; filter: brightness(0.8); transition: filter 0.3s;">
+        <img src="https://img.icons8.com/ios-glyphs/30/1de9b6/github.png" alt="GitHub" width="32" />
       </a>
     </div>
-    <p style="font-size: 0.9rem;">📞 +91 7384661310</p>
+    <p style="font-size: 1.1rem;">📞 +91 7384661310</p>
   </div>
 
-  <p style="margin-top: 40px; font-size: 0.9rem; color: #888;">
-    Designed with ❤️ by Kanan Pandit
-  </p>
+  <p style="margin-top: 50px; font-size: 1rem; color: #f0eaea;">
+  Designed with ❤️ by Kanan Pandit
+</p>
+
 </footer>
+
 
 
   <script>
