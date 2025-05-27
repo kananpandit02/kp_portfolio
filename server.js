@@ -5,7 +5,9 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 5000;
+
+// Use environment variable PORT if available, else 5000 (for local)
+const PORT = process.env.PORT || 5000;
 const DATA_FILE = path.join(__dirname, 'messages.json');
 
 app.use(cors());
@@ -53,5 +55,10 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  // Show different URL based on environment
+  if (process.env.PORT) {
+    console.log(`Server is running on your deployed environment (port ${PORT})`);
+  } else {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  }
 });
