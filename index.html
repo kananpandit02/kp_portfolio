@@ -476,39 +476,47 @@
   transform: translateY(50px);
   transition: all 0.6s ease;
 }
+#about-me-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-  #about-me-section.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
 
-  .about-container {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-  }
+.about-photo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.4s ease;
+}
 
-  .about-photo {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    transition: transform 0.4s ease;
-  }
+.about-photo img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
+  object-fit: cover;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+  filter: grayscale(100%) brightness(0.8);  /* Start black & white */
+  cursor: pointer;
+}
 
-  .about-photo img {
-    width: 100%;
-    max-width: 350px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
-    object-fit: cover;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-  }
+.about-photo img.colorful {
+  filter: none;  /* Remove filter to show color */
+  box-shadow: 0 0 20px rgba(0, 102, 204, 0.5);
+  transform: scale(1.05);
+}
 
-  .about-photo img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 102, 204, 0.5);
-  }
+.about-photo img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 102, 204, 0.5);
+}
+
 
   .about-text {
     flex: 1;
@@ -561,7 +569,83 @@
   </script>
 </body>
 
+
+
+
 <body>
+  <div id="vanta-bg"></div>
+
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <i data-lucide="moon" id="theme-icon"></i>
+  </button>
+
+  <header class="animated-header" style="text-align: center; color: white; padding-top: 60px; font-family: Arial, sans-serif;">
+    
+    <!-- Intro Typing -->
+    <h3>
+      <span id="typed-intro" style="color: #FFA500; font-weight: 700; font-size: 1.8rem; text-shadow: 1px 1px 2px black;"></span>
+    </h3>
+
+    <!-- Static line -->
+    <h3 style="color: #e0e0e0; font-weight: 600; margin: 10px 0; font-size: 1.6rem;">
+      Welcome to My Portfolio
+    </h3>
+
+    <!-- Skills Typing -->
+    <h3>
+      I am into 
+      <span id="typed-skills" style="color: #00FFFF; font-weight: 700; font-size: 1.8rem; text-shadow: 1px 1px 2px black;"></span>
+    </h3>
+
+  </header>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script>
+    const typedIntro = new Typed("#typed-intro", {
+      strings: [
+        "Hi there, I am Kanan Pandit"
+      ],
+      typeSpeed: 50,
+      backSpeed: 30,
+      backDelay: 1500,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|'
+    });
+
+    const typedSkills = new Typed("#typed-skills", {
+      strings: [
+        "Machine Learning",
+        "Deep Learning",
+        "Computer Vision",
+        "Artificial Intelligence",
+        "Distributed Computing"
+      ],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 1500,
+      loop: true,
+      showCursor: true,
+      cursorChar: '|'
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const introCursor = document.querySelector('#typed-intro + .typed-cursor');
+      if (introCursor) introCursor.style.color = '#FFA500'; // bright orange
+
+      const skillsCursor = document.querySelector('#typed-skills + .typed-cursor');
+      if (skillsCursor) skillsCursor.style.color = '#00FFFF'; // bright aqua
+    });
+  </script>
+</body>
+
+
+
+
+
+
+<!-- <body>
 
   <div id="vanta-bg"></div>
   <button class="theme-toggle" onclick="toggleTheme()">
@@ -571,7 +655,9 @@
   <header class="animated-header">
   <h1>Hi There,</h1>
   <h2>I'm Kanan Pandit </h2>
-  <h3>Welcome to My Portfolio</h3>
+  <h3>Welcome to My Portfolio</h3> 
+  -->
+
 </header>
 
 <style>
@@ -705,7 +791,10 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#coursework">Coursework</a></li>
       <li><a href="#interests">Interests</a></li>
-      <li><a href="#additional">More</a></li>
+      <li><a href="#activity">Activity</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#get-in-touch">Get In Touch</a></li>
+      <!-- <li><a href="#additional">More</a></li> -->
     </ul>
   </nav>
 
@@ -715,7 +804,7 @@
   
   
 
-  <section id="about-me-section">
+  <!-- <section id="about-me-section">
   <div class="about-container">
     <div class="about-photo">
       <img src="profile.jpg" alt="My Photo" />
@@ -735,7 +824,32 @@
   </p>
 </div>
 
+</section> -->
+<section id="about-me-section">
+  <div class="about-container">
+    <div class="about-photo">
+      <img src="profile.jpg" alt="Kanan Pandit Profile Photo" />
+    </div>
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>
+        <strong>I'm Kanan Pandit</strong><br />
+        <strong>Master’s Student in Data Science</strong>
+      </p>
+      <p>
+        I am currently pursuing a Master’s degree in Data Science with a strong focus on <strong>Machine Learning</strong>,<strong>Deep Learning</strong>,<strong>Computer Vision</strong>
+        ,<strong>Artificial Intelligence</strong>  and <strong>Distributed Computing</strong>. I have a solid academic foundation in 
+        <strong>statistical modeling</strong> and <strong>data processing</strong>, and I excel at translating complex datasets 
+        into clear, actionable insights.
+      </p>
+      <p>
+        My passion lies in leveraging data to solve real-world challenges through innovative, evidence-based approaches. 
+        I am committed to continuous learning and thrive in environments that promote creativity, collaboration, and analytical thinking.
+      </p>
+    </div>
+  </div>
 </section>
+
 
 <!-- <section id="contact" class="tilt" style="color: #f0f0f0;">  for 3d view effect-->
 <section id="contact" style="color: #f0f0f0;">
@@ -1019,43 +1133,56 @@
 
   <div class="color-beam"></div>
 
-  <section id="skills">
+<section id="skills">
   <h2>Technical Skills</h2>
   <div class="skills-boxes">
     <div class="skill-group">
-      <strong>Languages:</strong>
-      <p>Python, C, R</p>
+      <strong>Programming Languages:</strong>
+      <p>Python, C, R, Java, SQL, LaTeX</p>
     </div>
     <div class="skill-group">
-      <strong>Tools:</strong>
-      <p>MySQL, Hadoop, Spark, Power BI</p>
+      <strong>Libraries & Frameworks:</strong>
+      <p>PyTorch, OpenCV, scikit-learn, Seaborn, PySpark, Neo4j, H2O, Ray, NumPy, Pandas, Matplotlib, NLTK, TensorFlow, Hugging Face Transformers</p>
     </div>
     <div class="skill-group">
-      <strong>Libraries:</strong>
-      <p>NumPy, Pandas, Scikit-learn, PyTorch</p>
+      <strong>Tools, Platforms & Databases:</strong>
+      <p>Git, GitHub, Jupyter Notebook, Google Colab, VS Code, Streamlit, Power BI, MySQL, Hadoop, Spark</p>
+    </div>
+    <div class="skill-group">
+      <strong>Operating Systems:</strong>
+      <p>Windows, Linux (Ubuntu)</p>
     </div>
   </div>
 </section>
+
 
 
   <div class="color-beam"></div>
 
   <!-- <section id="coursework" class="tilt">  for 3d view effect-->
-  <section id="coursework" >
+<section id="coursework">
   <h2>Coursework</h2>
   <div class="coursework-boxes">
-    <div class="coursework-item">Probability</div>
-    <div class="coursework-item">Time Series</div>
-    <div class="coursework-item">Survival Analysis</div>
-
     <div class="coursework-item">Machine Learning</div>
-    <div class="coursework-item">Deep Learning</div>
-    <div class="coursework-item">NLP</div>
-    <div class="coursework-item">Data Structure and Algorithms</div>
-    <div class="coursework-item">Hadoop</div>
-    <div class="coursework-item">Spark</div>
+    <div class="coursework-item">Deep Learning and NLP</div>
+    <div class="coursework-item">Java & Hadoop</div>
+    <div class="coursework-item">Computer Vision</div>
+    <div class="coursework-item">Artificial Intelligence</div>
+    <div class="coursework-item">Reinforcement Learning</div>
+    <div class="coursework-item">Data Structures and Algorithms</div>
+    <div class="coursework-item">Finance and Econometrics</div>
+    <div class="coursework-item">Joy of Computing Using Python</div>
+    <div class="coursework-item">Linear Algebra</div>
+    <div class="coursework-item">Graph Database & Distributed Computing</div>
+    <div class="coursework-item">Statistics-I</div>
+    <div class="coursework-item">Advanced Statistics</div>
+    <div class="coursework-item">Time Series & Survival Analysis</div>
+    <div class="coursework-item">Probability and Stochastic Process</div>
+    <div class="coursework-item">Universal Human Values</div>
+    <div class="coursework-item">Database Management Systems</div>
   </div>
 </section>
+
 
 
   <div class="color-beam"></div>
@@ -1066,7 +1193,7 @@
     <div class="interest-item">Deep Learning</div>
     <div class="interest-item">Machine Learning</div>
     <div class="interest-item">Computer Vision</div>
-    <div class="interest-item">Optimization</div>
+    <!-- <div class="interest-item">Optimization</div> -->
     <div class="interest-item">Distributed Systems</div>
   </div>
 </section>
@@ -1074,12 +1201,38 @@
   <div class="color-beam"></div>
 
   <section id="additional">
-    <h2>Additional Skills & Hobbies</h2>
+  <h2>Additional Skills & Hobbies</h2>
   <div class="additional-boxes">
     <div class="additional-item"><strong>Languages:</strong> English, Bengali, Hindi</div>
-    <div class="additional-item"><strong>Hobbies:</strong> Cricket, Listening Music</div>
+    <div class="additional-item"><strong>Hobbies:</strong> Playing Cricket, Watching Movies, Traveling</div>
   </div>
-  </section>
+</section>
+<section id="achievements">
+  <h2>Achievements</h2>
+  <div class="achievement-item">
+    <p>• Scored 86% in NPTEL course “The Joy of Computing using Python”, offered by IIT Ropar</p>
+    <img src="nptel.png" alt="Certificate of Joy of Computing using Python" style="width: 100%; height: auto; margin-top: 10px;">
+  </div>
+</section>
+
+
+<section id="activity">
+  <h2>Activity</h2>
+  <div class="activity-boxes">
+    <div class="activity-item">
+      <strong>Placement Volunteer, RKMVERI:</strong>
+      <p>Manage Placement Cell for the Batch of 2024–26</p>
+    </div>
+    <div class="activity-item">
+      <strong>Fest Organiser:</strong>
+      <ul>
+        <li>Team Member – Coding Event Organizing Committee, Perceptron 2025</li>
+        <li>Team Member – Hackathon Event Organizing Committee, Perceptron 2025</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 
   <!-- <div class="floating-btn" onclick="window.location.href='mailto:kananpandit02@gmail.com'">
     <i data-lucide="mail"></i>
@@ -1345,6 +1498,18 @@
     }
   });
 </script>
+
+
+<!-- Your other HTML content -->
+
+<script>
+  document.querySelectorAll('.about-photo img').forEach(img => {
+    img.addEventListener('click', () => {
+      img.classList.toggle('colorful');
+    });
+  });
+</script>
+</body>
 
 <!-- <script>
   document.addEventListener("visibilitychange", function () {
