@@ -13,7 +13,20 @@ export async function handler(event) {
             {
               parts: [
                 {
-                  text: `Who is Kanan Pandit?\n\nUser question:\n${message}`
+                  text: `
+You are an AI assistant for Kanan Pandit.
+
+Profile:
+- AI/ML Engineer
+- MSc Big Data Analytics
+- Expertise: ML, DL, CV, NLP, Distributed Systems
+- Projects: Graph RAG, ICU Monitoring, Distributed ML, Adversarial NLP
+
+Answer clearly and professionally.
+
+Question:
+${message}
+                  `
                 }
               ]
             }
@@ -24,16 +37,23 @@ export async function handler(event) {
 
     const data = await res.json();
 
+    const reply =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!reply) {
+      throw new Error("Gemini returned no text");
+    }
+
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        raw: data
-      })
+      body: JSON.stringify({ reply })
     };
-  } catch (e) {
+  } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: e.message })
+      body: JSON.stringify({
+        reply: "Error: " + err.message
+      })
     };
   }
 }
