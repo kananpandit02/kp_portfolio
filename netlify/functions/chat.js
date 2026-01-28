@@ -1,6 +1,7 @@
 export async function handler(event) {
   try {
-    const { message } = JSON.parse(event.body);
+    const body = JSON.parse(event.body || "{}");
+    const message = body.message || "";
 
     const apiKey = process.env.GEMINI_API_KEY;
 
@@ -8,28 +9,29 @@ export async function handler(event) {
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          systemInstruction: {
+            parts: [
+              {
+                text: "You are an AI assistant that answers questions ONLY about Kanan Pandit. Be clear, professional, and concise."
+              }
+            ]
+          },
           contents: [
             {
-              role: "user",
               parts: [
                 {
                   text: `
-You are an AI assistant for Kanan Pandit.
-Answer ONLY about Kanan Pandit.
-
-Profile:
+Kanan Pandit Profile:
 - AI/ML Engineer
 - MSc Big Data Analytics
-- Strong in ML, DL, CV, NLP, Distributed Systems
-- Projects: Graph RAG, ICU Monitoring, Distributed ML
+- Expertise: Machine Learning, Deep Learning, Computer Vision, NLP, Distributed Systems
 - Tools: PyTorch, Spark, H2O, HuggingFace, OpenCV
-- Focus: Production AI & Medical AI
+- Projects: Graph RAG, ICU Monitoring, Distributed ML, Adversarial NLP
+- Focus: Production AI and Medical AI
 
-Question:
+User Question:
 ${message}
                   `
                 }
@@ -53,7 +55,8 @@ ${message}
       return {
         statusCode: 200,
         body: JSON.stringify({
-          reply: "Gemini is active but returned empty output. Try again."
+          reply:
+            "⚠️ Gemini responded but produced no text. API is active — format issue resolved, retry."
         })
       };
     }
@@ -62,7 +65,6 @@ ${message}
       statusCode: 200,
       body: JSON.stringify({ reply })
     };
-
   } catch (err) {
     return {
       statusCode: 500,
