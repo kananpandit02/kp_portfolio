@@ -5,7 +5,7 @@ export async function handler(event) {
 
     if (!message) {
       return {
-        statusCode: 400,
+        statusCode: 200,
         body: JSON.stringify({ reply: "No message provided." })
       };
     }
@@ -18,10 +18,12 @@ export async function handler(event) {
           "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
           "HTTP-Referer": "https://kananpanditportfolio.netlify.app",
-          "X-Title": "Kanan Pandit Portfolio Chatbot"
+          "X-Title": "Kanan Pandit Portfolio AI"
         },
         body: JSON.stringify({
+          // 🔒 MODEL IS FIXED HERE (FREE)
           model: "arcee-ai/trinity-large-preview:free",
+
           messages: [
             {
               role: "system",
@@ -29,12 +31,12 @@ export async function handler(event) {
 You are an AI assistant for Kanan Pandit.
 Answer ONLY about Kanan Pandit.
 
-Profile:
+Profile summary:
 - AI/ML Engineer
 - MSc Big Data Analytics
 - Skills: ML, DL, CV, NLP, Distributed Systems
 - Tools: PyTorch, Spark, H2O, HuggingFace, OpenCV
-- Projects: Graph RAG, ICU Monitoring, Distributed ML
+- Projects: Graph RAG, Distributed ML, ICU Monitoring
 `
             },
             {
@@ -51,18 +53,11 @@ Profile:
     const data = await response.json();
     const reply = data?.choices?.[0]?.message?.content;
 
-    if (!reply) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({
-          reply: "⚠️ AI is busy. Please try again."
-        })
-      };
-    }
-
     return {
       statusCode: 200,
-      body: JSON.stringify({ reply })
+      body: JSON.stringify({
+        reply: reply || "⚠️ AI responded with no text. Try again."
+      })
     };
 
   } catch (err) {
