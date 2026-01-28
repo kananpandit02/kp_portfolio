@@ -1,3 +1,4 @@
+
 {
   "name": "contact-form-backend",
   "version": "1.0.0",
@@ -11,6 +12,7 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "openai": "^4.0.0"
   }
 }
