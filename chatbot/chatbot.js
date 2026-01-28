@@ -1,99 +1,69 @@
-const root = document.getElementById("ai-chatbot-root");
+(function () {
+  const root = document.getElementById("ai-chatbot-root");
 
-root.innerHTML = `
-<div id="ai-chatbox">
-  <div class="ai-header">
-    <strong>Kanan AI</strong>
-    <span onclick="closeChat()">✖</span>
-  </div>
-  <div id="ai-messages" class="ai-messages">
-    <div class="bot">Hi 👋 Ask me about Kanan Pandit.</div>
-  </div>
-  <div class="ai-input">
-    <input id="ai-input" placeholder="Ask about skills, projects, work…" />
-    <button onclick="sendMsg()">Send</button>
-  </div>
-</div>
-`;
+  const box = document.createElement("div");
+  box.style.cssText = `
+    position:fixed;
+    bottom:90px;
+    right:20px;
+    width:320px;
+    height:420px;
+    background:#0f2027;
+    color:white;
+    border-radius:14px;
+    box-shadow:0 20px 50px rgba(0,0,0,.5);
+    display:flex;
+    flex-direction:column;
+    z-index:9999;
+    font-family:system-ui;
+  `;
 
-const style=document.createElement("style");
-style.innerHTML=`
-#ai-chatbox{
-  position:fixed;
-  right:110px;
-  top:50%;
-  transform:translateY(-50%);
-  width:340px;
-  background:#0f2027;
-  color:#fff;
-  border-radius:16px;
-  box-shadow:0 20px 50px rgba(0,0,0,.5);
-  z-index:9999;
-  font-family:Poppins,sans-serif;
-}
-.ai-header{
-  padding:12px;
-  background:linear-gradient(135deg,#00f2fe,#4facfe);
-  color:#000;
-  display:flex;
-  justify-content:space-between;
-}
-.ai-messages{
-  height:260px;
-  overflow-y:auto;
-  padding:12px;
-}
-.bot,.user{margin-bottom:10px;font-size:14px}
-.ai-input{
-  display:flex;
-  border-top:1px solid #222;
-}
-.ai-input input{
-  flex:1;
-  padding:10px;
-  border:none;
-  outline:none;
-}
-.ai-input button{
-  background:#00f2fe;
-  border:none;
-  padding:10px 14px;
-  cursor:pointer;
-}
-`;
-document.head.appendChild(style);
+  box.innerHTML = `
+    <div style="padding:12px;background:#00c6ff;color:black;font-weight:700">
+      🤖 Ask about Kanan Pandit
+    </div>
+    <div id="log" style="flex:1;padding:10px;overflow:auto;font-size:14px"></div>
+    <div style="display:flex;border-top:1px solid #333">
+      <input id="inp" placeholder="Ask something..."
+        style="flex:1;padding:10px;border:none;outline:none"/>
+      <button id="send"
+        style="padding:10px;background:#00c6ff;border:none;font-weight:700">
+        Send
+      </button>
+    </div>
+  `;
 
-async function sendMsg(){
-  const input=document.getElementById("ai-input");
-  const text=input.value.trim();
-  if(!text) return;
+  root.appendChild(box);
 
-  const box=document.getElementById("ai-messages");
-  box.innerHTML+=`<div class="user">${text}</div>`;
-  input.value="";
+  const log = box.querySelector("#log");
+  const inp = box.querySelector("#inp");
+  const send = box.querySelector("#send");
 
-  const wait=document.createElement("div");
-  wait.className="bot";
-  wait.innerText="Thinking…";
-  box.appendChild(wait);
-
-  try{
-    const r=await fetch("/api/chat",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({message:text})
-    });
-    const d=await r.json();
-    wait.innerText=d.reply;
-  }catch{
-    wait.innerText="AI connection error.";
+  function add(who, text) {
+    const d = document.createElement("div");
+    d.style.margin = "6px 0";
+    d.innerHTML = `<b>${who}:</b> ${text}`;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
   }
 
-  box.scrollTop=box.scrollHeight;
-}
+  send.onclick = async () => {
+    const msg = inp.value.trim();
+    if (!msg) return;
+    add("You", msg);
+    inp.value = "";
+    add("AI", "Thinking...");
 
-function closeChat(){
-  document.getElementById("ai-chatbox").remove();
-  window.__aiChatbotLoaded=false;
-  document.querySelector(".ai-chatbot-btn").classList.remove("opened");
-}
+    try {
+      const res = await fetch("/.netlify/functions/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg })
+      });
+      const data = await res.json();
+      log.lastChild.innerHTML = `<b>AI:</b> ${data.reply}`;
+    } catch {
+      log.lastChild.innerHTML = `<b>AI:</b> Error contacting server`;
+    }
+  };
+})();
