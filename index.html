@@ -645,6 +645,9 @@
 
 
 
+  
+
+
 <!-- <body>
 
   <div id="vanta-bg"></div>
@@ -1778,8 +1781,10 @@
 </script>
 
 
-<!-- Your other HTML content -->
 
+
+
+<!-- Your existing script (KEEP AS IS) -->
 <script>
   document.querySelectorAll('.about-photo img').forEach(img => {
     img.addEventListener('click', () => {
@@ -1787,29 +1792,61 @@
     });
   });
 </script>
-</body>
 
-<!-- <script>
-  document.addEventListener("visibilitychange", function () {
-    if (!document.hidden) {
-      alert("Thanks for visiting! 👋 Come back anytime.");
-    }
-  });
-</script> -->
-<!-- 
+
+
+
+  
+<!-- ================= AI CHATBOT (LAZY, NO SLOWDOWN) ================= -->
+
+<!-- Invisible container (safe) -->
+<div id="ai-chatbot-root"></div>
+
+<!-- Loader function (loads ONLY on click) -->
 <script>
-  const originalTitle = document.title;
+  function loadAIChatbot() {
+    if (window.__aiChatbotLoaded) return;
+    window.__aiChatbotLoaded = true;
 
-  document.addEventListener("visibilitychange", function () {
-    if (document.hidden) {
-      document.title = "Thanks for visiting! 👋";
-    } else {
-      document.title = originalTitle;
-    }
-  });
-</script> -->
+    const s = document.createElement("script");
+    s.src = "/chatbot/chatbot.js";
+    s.async = true;
+    document.body.appendChild(s);
+  }
+</script>
 
+<!-- Floating AI button -->
+<button
+  onclick="loadAIChatbot()"
+  aria-label="AI Assistant"
+  style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #00f2fe;
+    color: black;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  "
+>
+  🤖
+</button>
 
+<!-- ================================================================ -->
 
 </body>
 </html>
+
+
+
+
+
+
+
+ 
