@@ -14,15 +14,10 @@ export async function handler(event) {
               parts: [
                 {
                   text: `
-You are an AI assistant for Kanan Pandit.
+You are a professional AI assistant for Kanan Pandit.
 
-Profile:
-- AI/ML Engineer
-- MSc Big Data Analytics
-- Expertise: ML, DL, CV, NLP, Distributed Systems
-- Projects: Graph RAG, ICU Monitoring, Distributed ML, Adversarial NLP
-
-Answer clearly and professionally.
+Answer ONLY about Kanan Pandit.
+Be concise, factual, and professional.
 
 Question:
 ${message}
@@ -30,18 +25,39 @@ ${message}
                 }
               ]
             }
-          ]
+          ],
+          generationConfig: {
+            temperature: 0.3,
+            maxOutputTokens: 512
+          }
         })
       }
     );
 
     const data = await res.json();
 
-    const reply =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    // 🔎 Robust text extraction
+    let reply = null;
 
+    if (data?.candidates?.length) {
+      for (const part of data.candidates[0].content?.parts || []) {
+        if (part.text) {
+          reply = part.text;
+          break;
+        }
+      }
+    }
+
+    // 🚨 Safety / quota / silent block
     if (!reply) {
-      throw new Error("Gemini returned no text");
+      console.error("Gemini raw response:", JSON.stringify(data));
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          reply:
+            "⚠️ AI is temporarily unavailable. Please try again in a moment."
+        })
+      };
     }
 
     return {
@@ -52,7 +68,7 @@ ${message}
     return {
       statusCode: 500,
       body: JSON.stringify({
-        reply: "Error: " + err.message
+        reply: "Server error: " + err.message
       })
     };
   }
