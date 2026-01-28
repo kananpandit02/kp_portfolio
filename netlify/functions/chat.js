@@ -5,7 +5,7 @@ export async function handler(event) {
     const apiKey = process.env.GEMINI_API_KEY;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: {
@@ -19,14 +19,14 @@ export async function handler(event) {
                 {
                   text: `
 You are an AI assistant for Kanan Pandit.
-Answer ONLY using the information below.
+Answer ONLY about Kanan Pandit.
 
 Profile:
 - AI/ML Engineer
 - MSc Big Data Analytics
 - Strong in ML, DL, CV, NLP, Distributed Systems
 - Projects: Graph RAG, ICU Monitoring, Distributed ML
-- Tools: PyTorch, Spark, H2O, HuggingFace
+- Tools: PyTorch, Spark, H2O, HuggingFace, OpenCV
 - Focus: Production AI & Medical AI
 
 Question:
@@ -35,15 +35,16 @@ ${message}
                 }
               ]
             }
-          ]
+          ],
+          generationConfig: {
+            temperature: 0.4,
+            maxOutputTokens: 512
+          }
         })
       }
     );
 
     const data = await response.json();
-
-    // 🔍 DEBUG SAFETY
-    console.log("Gemini response:", JSON.stringify(data));
 
     const reply =
       data?.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -52,7 +53,7 @@ ${message}
       return {
         statusCode: 200,
         body: JSON.stringify({
-          reply: "⚠️ Gemini returned no text. Check API & model access."
+          reply: "Gemini is active but returned empty output. Try again."
         })
       };
     }
