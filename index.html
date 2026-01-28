@@ -1796,13 +1796,10 @@
 
 
 
-  
-<!-- ================= AI CHATBOT (LAZY, NO SLOWDOWN) ================= -->
+<!-- ================= AI CHATBOT (FINAL PRODUCTION) ================= -->
 
-<!-- Invisible container (safe) -->
 <div id="ai-chatbot-root"></div>
 
-<!-- Loader function (loads ONLY on click) -->
 <script>
   function loadAIChatbot() {
     if (window.__aiChatbotLoaded) return;
@@ -1812,31 +1809,73 @@
     s.src = "/chatbot/chatbot.js";
     s.async = true;
     document.body.appendChild(s);
+
+    document.querySelector(".ai-chatbot-btn").classList.add("opened");
   }
 </script>
 
-<button
-  onclick="loadAIChatbot()"
-  aria-label="AI Assistant"
-  style="
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #00f2fe;
-    color: black;
-    border: none;
-    font-size: 26px;
-    cursor: pointer;
-    z-index: 9999;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-  "
->
+<button onclick="loadAIChatbot()" class="ai-chatbot-btn">
   🤖
+  <span class="ai-ripple"></span>
 </button>
+
+<style>
+/* ===== PREMIUM AI CHATBOT BUTTON ===== */
+
+.ai-chatbot-btn{
+  position: fixed;
+  top: 50%;
+  right: 22px;
+  transform: translateY(-50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top left,#7ffcff,#00c6ff,#0072ff);
+  font-size: 32px;
+  border: none;
+  cursor: pointer;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    0 0 0 rgba(0,198,255,0.7);
+
+  animation: pulseGlow 2.6s infinite, floatY 4s ease-in-out infinite;
+}
+
+.ai-chatbot-btn.opened{ animation: none; }
+
+.ai-ripple{
+  position:absolute;
+  inset:-10px;
+  border-radius:50%;
+  border:2px solid rgba(0,198,255,0.65);
+  animation:rippleWave 3.8s infinite;
+  pointer-events:none;
+}
+
+@keyframes pulseGlow{
+  0%{box-shadow:0 0 0 0 rgba(0,198,255,.65)}
+  70%{box-shadow:0 0 0 22px rgba(0,198,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(0,198,255,0)}
+}
+
+@keyframes rippleWave{
+  from{transform:scale(.85);opacity:.85}
+  to{transform:scale(1.35);opacity:0}
+}
+
+@keyframes floatY{
+  0%,100%{transform:translateY(-50%)}
+  50%{transform:translateY(calc(-50% - 8px))}
+}
+</style>
+
+<!-- ================================================================ -->
+
 
 <!-- ================================================================ -->
 
