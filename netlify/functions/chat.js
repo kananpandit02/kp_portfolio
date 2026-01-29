@@ -1,103 +1,89 @@
 import { Langfuse } from "langfuse";
 
-// ===== Langfuse Init (SAFE, non-blocking) =====
+/* ================= Langfuse Init ================= */
 const langfuse = new Langfuse({
   publicKey: process.env.LANGFUSE_PUBLIC_KEY,
   secretKey: process.env.LANGFUSE_SECRET_KEY,
-  baseUrl: process.env.LANGFUSE_BASE_URL || "https://cloud.langfuse.com"
+  baseUrl: process.env.LANGFUSE_HOST || "https://us.cloud.langfuse.com"
 });
 
-// ===== Personalized RAG Data =====
+/* ================= RAG CONTEXT ================= */
 const resumeContext = `
 Kanan Pandit is an AI/ML Engineer and MSc student in Big Data Analytics.
-Skills include Machine Learning, Deep Learning, Computer Vision,
+He specializes in Machine Learning, Deep Learning, Computer Vision,
 Natural Language Processing, and Distributed Systems.
+
 Tools: PyTorch, Apache Spark, H2O, HuggingFace, OpenCV.
-Projects include Graph RAG systems, Distributed ML pipelines,
-and healthcare AI for ICU monitoring.
+Projects: Graph RAG systems, Distributed ML pipelines,
+Healthcare AI for ICU monitoring.
 `;
 
 const portfolioContext = `
-This portfolio showcases Kanan Pandit's academic and project journey
-in AI, data science, and scalable distributed systems.
+This portfolio represents Kanan Pandit's academic, research,
+and project journey in AI, data science, and scalable systems.
 `;
 
-// ===== Agent Router =====
+/* ================= AGENT ROUTER ================= */
 function routeQuery(message) {
   const q = message.toLowerCase();
 
-  if (
-    q.includes("skill") ||
-    q.includes("education") ||
-    q.includes("experience")
-  ) return "RESUME";
+  if (q.includes("skill") || q.includes("education") || q.includes("experience"))
+    return "RESUME";
 
-  if (
-    q.includes("project") ||
-    q.includes("portfolio")
-  ) return "PORTFOLIO";
+  if (q.includes("project") || q.includes("portfolio"))
+    return "PORTFOLIO";
 
-  if (
-    q.includes("food") ||
-    q.includes("family") ||
-    q.includes("personal")
-  ) return "REFUSE";
+  if (q.includes("food") || q.includes("family"))
+    return "REFUSE";
 
   return "GENERAL";
 }
 
-// ===== Prompt Builder =====
-function buildPrompt(route, message) {
-  if (route === "REFUSE") {
-    return `
-I only answer professional questions about Kanan Pandit.
-If the information is not available, politely say so.
-`;
-  }
-
-  const context =
-    route === "RESUME" ? resumeContext :
-    route === "PORTFOLIO" ? portfolioContext :
-    "";
-
+/* ================= PROMPT BUILDER ================= */
+function buildSystemPrompt(route) {
   return `
-You are an AI assistant created by Kanan Pandit.
+You are the OFFICIAL AI assistant of Kanan Pandit.
 
 Rules:
-- Answer ONLY using the provided context.
-- Do NOT guess or hallucinate.
-- If the answer is not present, say "I don't have that information."
+- You ALWAYS know who Kanan Pandit is.
+- You ONLY talk about Kanan Pandit professionally.
+- You NEVER say "I don't have that information" about him.
+- If asked personal or irrelevant things, politely redirect.
 
 Context:
-${context}
-
-Question:
-${message}
+${route === "RESUME" ? resumeContext : ""}
+${route === "PORTFOLIO" ? portfolioContext : ""}
 `;
 }
 
-// ===== Netlify Function Handler =====
+/* ================= NETLIFY HANDLER ================= */
 export async function handler(event) {
+  const body = JSON.parse(event.body || "{}");
+  const message = body.message?.trim();
+
+  if (!message) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ reply: "Please ask a question about Kanan Pandit." })
+    };
+  }
+
+  const route = routeQuery(message);
+  const systemPrompt = buildSystemPrompt(route);
+
+  const trace = langfuse.trace({
+    name: "portfolio-chat",
+    input: message,
+    metadata: { route }
+  });
+
   try {
-    const body = JSON.parse(event.body || "{}");
-    const message = body.message;
-
-    if (!message) {
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ reply: "No message provided." })
-      };
-    }
-
-    const route = routeQuery(message);
-    const prompt = buildPrompt(route, message);
-
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
           "HTTP-Referer": "https://kananpanditportfolio.netlify.app",
           "X-Title": "Kanan Pandit Portfolio AI"
@@ -105,39 +91,28 @@ export async function handler(event) {
         body: JSON.stringify({
           model: "arcee-ai/trinity-large-preview:free",
           messages: [
-            {
-              role: "system",
-              content: "You are a professional AI assistant for Kanan Pandit."
-            },
+            { role: "system", content: systemPrompt },
             {
               role: "user",
-              content: prompt
+              content: `Question about Kanan Pandit: ${message}`
             }
           ],
-          temperature: 0.4,
+          temperature: 0.3,
           max_tokens: 400
         })
       }
     );
 
     const data = await response.json();
-    const reply = data?.choices?.[0]?.message?.content
-      || "⚠️ AI responded with no text. Try again.";
+    const reply =
+      data?.choices?.[0]?.message?.content ||
+      "Kanan Pandit is an AI/ML Engineer with strong expertise in machine learning and big data.";
 
-    // ===== Langfuse Logging (NON-BLOCKING) =====
-    try {
-      await langfuse.trace({
-        name: "portfolio-chat",
-        input: message,
-        output: reply,
-        metadata: {
-          route,
-          model: "arcee-ai/trinity-large-preview:free"
-        }
-      });
-    } catch (e) {
-      console.error("Langfuse error:", e.message);
-    }
+    trace.generation({
+      name: "llm-response",
+      output: reply,
+      model: "arcee-ai/trinity-large-preview:free"
+    });
 
     return {
       statusCode: 200,
@@ -145,11 +120,12 @@ export async function handler(event) {
     };
 
   } catch (err) {
+    trace.error({ message: err.message });
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        reply: "Server error: " + err.message
-      })
+      body: JSON.stringify({ reply: "Server error. Please try again." })
     };
+  } finally {
+    await langfuse.flush();
   }
 }
