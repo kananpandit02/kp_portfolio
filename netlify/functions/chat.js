@@ -36,48 +36,57 @@ function routeQuery(message) {
   if (q.includes("food") || q.includes("family"))
     return "REFUSE";
 
+  // IMPORTANT: who / about / intro should map to RESUME
+  if (q.includes("who is") || q.includes("about"))
+    return "RESUME";
+
   return "GENERAL";
 }
 
-/* ================= PROMPT BUILDER ================= */
+/* ================= SYSTEM PROMPT ================= */
 function buildSystemPrompt(route) {
   return `
 You are the OFFICIAL AI assistant of Kanan Pandit.
 
-Rules:
-- You ALWAYS know who Kanan Pandit is.
-- You ONLY talk about Kanan Pandit professionally.
-- You NEVER say "I don't have that information" about him.
-- If asked personal or irrelevant things, politely redirect.
+STRICT RULES:
+- Answer ONLY using the provided context.
+- Do NOT use outside knowledge.
+- Do NOT guess or hallucinate.
+- If information is not present, say:
+  "That information is not available in this portfolio."
 
-Context:
-${route === "RESUME" ? resumeContext : ""}
+CONTEXT:
+${resumeContext}
 ${route === "PORTFOLIO" ? portfolioContext : ""}
 `;
 }
 
 /* ================= NETLIFY HANDLER ================= */
 export async function handler(event) {
-  const body = JSON.parse(event.body || "{}");
-  const message = body.message?.trim();
-
-  if (!message) {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ reply: "Please ask a question about Kanan Pandit." })
-    };
-  }
-
-  const route = routeQuery(message);
-  const systemPrompt = buildSystemPrompt(route);
-
-  const trace = langfuse.trace({
-    name: "portfolio-chat",
-    input: message,
-    metadata: { route }
-  });
+  let trace;
 
   try {
+    const body = JSON.parse(event.body || "{}");
+    const message = body.message?.trim();
+
+    if (!message) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          reply: "Please ask a question about Kanan Pandit."
+        })
+      };
+    }
+
+    const route = routeQuery(message);
+    const systemPrompt = buildSystemPrompt(route);
+
+    trace = langfuse.trace({
+      name: "portfolio-chat",
+      input: message,
+      metadata: { route }
+    });
+
     const response = await fetch(
       "https://openrouter.ai/api/v1/chat/completions",
       {
@@ -92,13 +101,10 @@ export async function handler(event) {
           model: "arcee-ai/trinity-large-preview:free",
           messages: [
             { role: "system", content: systemPrompt },
-            {
-              role: "user",
-              content: `Question about Kanan Pandit: ${message}`
-            }
+            { role: "user", content: message }
           ],
-          temperature: 0.3,
-          max_tokens: 400
+          temperature: 0.2,
+          max_tokens: 350
         })
       }
     );
@@ -106,7 +112,7 @@ export async function handler(event) {
     const data = await response.json();
     const reply =
       data?.choices?.[0]?.message?.content ||
-      "Kanan Pandit is an AI/ML Engineer with strong expertise in machine learning and big data.";
+      "That information is not available in this portfolio.";
 
     trace.generation({
       name: "llm-response",
@@ -120,10 +126,13 @@ export async function handler(event) {
     };
 
   } catch (err) {
-    trace.error({ message: err.message });
+    if (trace) trace.error({ message: err.message });
+
     return {
       statusCode: 500,
-      body: JSON.stringify({ reply: "Server error. Please try again." })
+      body: JSON.stringify({
+        reply: "Server error. Please try again."
+      })
     };
   } finally {
     await langfuse.flush();
