@@ -17,6 +17,7 @@ CONTACT
 Email: kananpandit02@gmail.com
 GitHub: https://github.com/kananpandit02
 LinkedIn: https://www.linkedin.com/in/kanan-pandit
+Mobile:7384661310
 
 PROFESSIONAL SUMMARY
 Kanan Pandit is an AI/ML Engineer at Rezolve AI (Jan 2026 – Present).
@@ -25,7 +26,7 @@ His core focus is building production-grade AI, machine learning,
 and distributed systems for real-world applications.
 
 EDUCATION
-- M.Sc in Big Data Analytics (2024 – Present)
+- M.Sc in Big Data Analytics (2024 – Present) ,CGPA: 9.75 till sem 1
   Ramakrishna Mission Vivekananda Educational and Research Institute (RKMVERI),
   Belur Math, West Bengal
 - B.Ed in Mathematics (2020 – 2022), CGPA: 9.75
