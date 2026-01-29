@@ -1,44 +1,93 @@
 import { Langfuse } from "langfuse";
 
-/* ================= Langfuse Init ================= */
+/* ================= LANGFUSE INIT ================= */
 const langfuse = new Langfuse({
   publicKey: process.env.LANGFUSE_PUBLIC_KEY,
   secretKey: process.env.LANGFUSE_SECRET_KEY,
   baseUrl: process.env.LANGFUSE_HOST || "https://us.cloud.langfuse.com"
 });
 
-/* ================= RAG CONTEXT ================= */
+/* ================= RESUME CONTEXT (PDF MATCHED) ================= */
 const resumeContext = `
-Kanan Pandit is an AI/ML Engineer and MSc student in Big Data Analytics.
-He specializes in Machine Learning, Deep Learning, Computer Vision,
-Natural Language Processing, and Distributed Systems.
+Kanan Pandit is an AI/ML Engineer at Rezolve AI (Jan 2026 – Present)
+and an MSc student in Big Data Analytics at
+Ramakrishna Mission Vivekananda Educational and Research Institute (RKMVERI),
+Belur Math, West Bengal, India.
 
-Tools: PyTorch, Apache Spark, H2O, HuggingFace, OpenCV.
-Projects: Graph RAG systems, Distributed ML pipelines,
-Healthcare AI for ICU monitoring.
+Education:
+- M.Sc in Big Data Analytics, RKMVERI (2024 – Present), CGPA: 7.26 (Till Sem-1)
+- B.Ed with Pedagogy of Mathematics, WBUTTEPA (2020 – 2022), CGPA: 9.75
+- B.Sc in Mathematics, Vidyasagar University (2017 – 2020), CGPA: 6.85
+
+Experience:
+- AI/ML Engineer at Rezolve AI (Jan 2026 – Present)
+  Working on machine learning and AI systems with a focus on
+  data-driven modeling and intelligent applications.
+
+Technical Skills:
+- Programming Languages: Python, R, LaTeX
+- Libraries & Frameworks: PyTorch, OpenCV, scikit-learn, Seaborn,
+  PySpark, Neo4j, H2O, Ray, NumPy, Pandas, Matplotlib
+- Tools & Platforms: Git, GitHub, Jupyter Notebook, Google Colab,
+  VS Code, Streamlit, MySQL
+- Operating Systems: Windows, Linux (Ubuntu)
 `;
 
+/* ================= PROJECT / PORTFOLIO CONTEXT ================= */
 const portfolioContext = `
-This portfolio represents Kanan Pandit's academic, research,
-and project journey in AI, data science, and scalable systems.
+Kanan Pandit has completed the following academic and applied AI projects:
+
+1. GraphRAG-Based Multi-Document Question Answering System (Aug 2025)
+   - Implemented a multi-stage GraphRAG pipeline using BM25,
+     FAISS dense retrieval, and Neo4j knowledge graphs.
+   - Designed entity-aware retrieval and citation-grounded
+     LLM responses to reduce hallucination.
+
+2. Wildfire Confidence Prediction using H2O Distributed Random Forest
+   (Jan 2025 – May 2025)
+   - Deployed a two-machine H2O cluster.
+   - Trained distributed Random Forest models for
+     multiclass wildfire confidence prediction.
+   - Performed feature engineering and statistical analysis.
+
+3. Artistic Image Transformation in Ghibli Aesthetic (Jan 2025 – May 2025)
+   - Built a CycleGAN for unpaired image-to-image translation.
+   - Converted real-world images into Studio Ghibli-style artwork.
+   - Deployed the system using Streamlit.
+
+4. Smart Control Hub using Hand Gestures (Jan 2025 – May 2025)
+   - Developed a gesture-based virtual controller using OpenCV and Mediapipe.
+   - Enabled real-time control of volume, brightness, mouse, and slides.
+
+5. Comparative Study of Classification Algorithms on the EMNIST Dataset
+   (Sep 2024 – Nov 2024)
+   - Compared multiple ML classifiers for 62-class handwritten
+     character recognition.
+   - Identified class imbalance and scalability challenges.
 `;
 
 /* ================= AGENT ROUTER ================= */
 function routeQuery(message) {
   const q = message.toLowerCase();
 
-  if (q.includes("skill") || q.includes("education") || q.includes("experience"))
-    return "RESUME";
-
   if (q.includes("project") || q.includes("portfolio"))
     return "PORTFOLIO";
 
-  if (q.includes("food") || q.includes("family"))
-    return "REFUSE";
-
-  // IMPORTANT: who / about / intro should map to RESUME
-  if (q.includes("who is") || q.includes("about"))
+  if (
+    q.includes("skill") ||
+    q.includes("education") ||
+    q.includes("experience") ||
+    q.includes("who is") ||
+    q.includes("about")
+  )
     return "RESUME";
+
+  if (
+    q.includes("food") ||
+    q.includes("family") ||
+    q.includes("personal")
+  )
+    return "REFUSE";
 
   return "GENERAL";
 }
@@ -46,13 +95,13 @@ function routeQuery(message) {
 /* ================= SYSTEM PROMPT ================= */
 function buildSystemPrompt(route) {
   return `
-You are the OFFICIAL AI assistant of Kanan Pandit.
+You are the OFFICIAL AI assistant created by Kanan Pandit.
 
 STRICT RULES:
 - Answer ONLY using the provided context.
 - Do NOT use outside knowledge.
 - Do NOT guess or hallucinate.
-- If information is not present, say:
+- If the information is not present, say:
   "That information is not available in this portfolio."
 
 CONTEXT:
@@ -61,7 +110,7 @@ ${route === "PORTFOLIO" ? portfolioContext : ""}
 `;
 }
 
-/* ================= NETLIFY HANDLER ================= */
+/* ================= NETLIFY FUNCTION ================= */
 export async function handler(event) {
   let trace;
 
@@ -104,7 +153,7 @@ export async function handler(event) {
             { role: "user", content: message }
           ],
           temperature: 0.2,
-          max_tokens: 350
+          max_tokens: 400
         })
       }
     );
