@@ -1,70 +1,76 @@
 (function () {
   const root = document.getElementById("ai-chatbot-root");
-  if (!root) return;
+  const launcher = document.querySelector(".ai-chatbot-btn");
+  if (!root || !launcher) return;
+
+  // Prevent duplicate UI
+  if (window.__aiChatbotUI) return;
+  window.__aiChatbotUI = true;
 
   // ===== Chat Box =====
   const box = document.createElement("div");
   box.style.cssText = `
     position:fixed;
-    bottom:90px;
+    bottom:100px;
     right:20px;
-    width:320px;
-    height:420px;
-    background:#0f2027;
+    width:340px;
+    height:440px;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
     color:white;
-    border-radius:14px;
-    box-shadow:0 20px 50px rgba(0,0,0,.5);
-    display:flex;
+    border-radius:16px;
+    box-shadow:0 25px 60px rgba(0,0,0,.6);
+    display:none;
     flex-direction:column;
-    z-index:9999;
+    z-index:9998;
     font-family:system-ui,-apple-system,BlinkMacSystemFont;
     overflow:hidden;
   `;
 
   box.innerHTML = `
     <div style="
-      padding:12px;
-      background:#00c6ff;
-      color:black;
-      font-weight:700;
+      padding:14px;
+      background:linear-gradient(135deg,#7ffcff,#00c6ff);
+      color:#000;
+      font-weight:800;
       display:flex;
       justify-content:space-between;
       align-items:center;
     ">
       🤖 Ask about Kanan Pandit
-      <span id="ai-close" style="cursor:pointer;font-weight:900">✕</span>
+      <span id="ai-close" style="cursor:pointer;font-size:18px">✕</span>
     </div>
 
     <div id="log" style="
       flex:1;
-      padding:10px;
+      padding:12px;
       overflow:auto;
       font-size:14px;
-      line-height:1.4;
+      line-height:1.5;
     "></div>
 
-    <div style="display:flex;border-top:1px solid #333">
-      <input
-        id="inp"
-        placeholder="Ask something..."
+    <div style="
+      display:flex;
+      border-top:1px solid rgba(255,255,255,.15);
+      background:#0b1c22;
+    ">
+      <input id="inp" placeholder="Ask something..."
         style="
           flex:1;
-          padding:10px;
+          padding:12px;
           border:none;
           outline:none;
+          background:transparent;
+          color:white;
           font-size:14px;
-        "
-      />
-      <button
-        id="send"
+        "/>
+      <button id="send"
         style="
-          padding:10px 14px;
+          padding:12px 16px;
           background:#00c6ff;
           border:none;
-          font-weight:700;
+          font-weight:800;
           cursor:pointer;
-        "
-      >
+        ">
         Send
       </button>
     </div>
@@ -78,13 +84,25 @@
   const send = box.querySelector("#send");
   const closeBtn = box.querySelector("#ai-close");
 
-  // ===== Close Chat =====
-  closeBtn.onclick = () => box.remove();
+  // ===== Toggle Logic =====
+  function openChat() {
+    box.style.display = "flex";
+    launcher.classList.add("opened");
+    inp.focus();
+  }
 
-  // ===== Safe Message Add (XSS-safe) =====
+  function closeChat() {
+    box.style.display = "none";
+    launcher.classList.remove("opened");
+  }
+
+  launcher.addEventListener("click", openChat);
+  closeBtn.addEventListener("click", closeChat);
+
+  // ===== Safe Message Add =====
   function add(who, text) {
     const d = document.createElement("div");
-    d.style.margin = "6px 0";
+    d.style.margin = "8px 0";
 
     const label = document.createElement("b");
     label.textContent = who + ": ";
@@ -100,13 +118,13 @@
     return d;
   }
 
-  // ===== Initial Welcome (Text only, safe) =====
+  // ===== Welcome =====
   add(
     "AI",
     "Hi 👋 I’m Kanan Pandit’s AI assistant. Ask me about his skills, projects, or experience."
   );
 
-  // ===== Send Message =====
+  // ===== Send =====
   async function sendMessage() {
     const msg = inp.value.trim();
     if (!msg) return;
@@ -114,7 +132,7 @@
     add("You", msg);
     inp.value = "";
 
-    const thinkingNode = add("AI", "Thinking…");
+    const thinking = add("AI", "Thinking…");
 
     try {
       const res = await fetch("/.netlify/functions/chat", {
@@ -124,17 +142,15 @@
       });
 
       const data = await res.json();
-      thinkingNode.lastChild.textContent =
+      thinking.lastChild.textContent =
         data.reply || "⚠️ No response from AI.";
-    } catch (err) {
-      thinkingNode.lastChild.textContent =
-        "⚠️ Error contacting server. Please try again.";
+    } catch {
+      thinking.lastChild.textContent =
+        "⚠️ Error contacting server.";
     }
   }
 
-  // ===== Events =====
   send.onclick = sendMessage;
-
   inp.addEventListener("keydown", e => {
     if (e.key === "Enter") sendMessage();
   });
