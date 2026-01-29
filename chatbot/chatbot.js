@@ -7,7 +7,7 @@
   if (window.__aiChatbotUI) return;
   window.__aiChatbotUI = true;
 
-  // ===== Chat Box =====
+  /* ================= CHAT BOX ================= */
   const box = document.createElement("div");
   box.style.cssText = `
     position:fixed;
@@ -50,41 +50,56 @@
 
     <div style="
       display:flex;
+      align-items:center;
+      gap:6px;
+      padding:10px;
       border-top:1px solid rgba(255,255,255,.15);
       background:#0b1c22;
     ">
+      <button id="mic"
+        title="Voice input"
+        style="
+          background:#00c6ff;
+          border:none;
+          border-radius:50%;
+          width:36px;
+          height:36px;
+          cursor:pointer;
+          font-size:18px;
+        ">🎤</button>
+
       <input id="inp" placeholder="Ask something..."
         style="
           flex:1;
-          padding:12px;
+          padding:10px;
           border:none;
           outline:none;
           background:transparent;
           color:white;
           font-size:14px;
         "/>
+
       <button id="send"
         style="
-          padding:12px 16px;
           background:#00c6ff;
           border:none;
+          padding:10px 14px;
           font-weight:800;
           cursor:pointer;
-        ">
-        Send
-      </button>
+        ">➤</button>
     </div>
   `;
 
   root.appendChild(box);
 
-  // ===== Elements =====
+  /* ================= ELEMENTS ================= */
   const log = box.querySelector("#log");
   const inp = box.querySelector("#inp");
   const send = box.querySelector("#send");
+  const mic = box.querySelector("#mic");
   const closeBtn = box.querySelector("#ai-close");
 
-  // ===== Toggle Logic =====
+  /* ================= TOGGLE ================= */
   function openChat() {
     box.style.display = "flex";
     launcher.classList.add("opened");
@@ -99,7 +114,7 @@
   launcher.addEventListener("click", openChat);
   closeBtn.addEventListener("click", closeChat);
 
-  // ===== Safe Message Add =====
+  /* ================= SAFE MESSAGE ADD ================= */
   function add(who, text) {
     const d = document.createElement("div");
     d.style.margin = "8px 0";
@@ -118,13 +133,13 @@
     return d;
   }
 
-  // ===== Welcome =====
+  /* ================= WELCOME ================= */
   add(
     "AI",
     "Hi 👋 I’m Kanan Pandit’s AI assistant. Ask me about his skills, projects, or experience."
   );
 
-  // ===== Send =====
+  /* ================= TEXT SEND ================= */
   async function sendMessage() {
     const msg = inp.value.trim();
     if (!msg) return;
@@ -154,5 +169,32 @@
   inp.addEventListener("keydown", e => {
     if (e.key === "Enter") sendMessage();
   });
+
+  /* ================= VOICE INPUT (BROWSER STT) ================= */
+  mic.onclick = () => {
+    if (!("webkitSpeechRecognition" in window)) {
+      add("AI", "Voice input not supported in this browser.");
+      return;
+    }
+
+    const rec = new webkitSpeechRecognition();
+    rec.lang = "en-US";
+    rec.continuous = false;
+    rec.interimResults = false;
+
+    add("AI", "🎤 Listening…");
+
+    rec.onresult = e => {
+      const transcript = e.results[0][0].transcript;
+      inp.value = transcript;
+      sendMessage();
+    };
+
+    rec.onerror = () => {
+      add("AI", "⚠️ Voice recognition failed.");
+    };
+
+    rec.start();
+  };
 
 })();
