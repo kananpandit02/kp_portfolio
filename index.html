@@ -821,7 +821,13 @@
   font-weight:600;
   margin-top:4px;
 }
-  
+
+
+
+.ai-news{
+  background:#1a1a1a;
+  color:#00ffcc;
+}
 /* my changes end  for fest update 06/03/2026 */
 
 
@@ -905,8 +911,9 @@
 <!-- my chnges 06/03/2026 for live festivel update start -->
 
 
-
-
+<div class="news-ticker ai-news">
+  <span id="ai-news-text">Loading AI news...</span>
+</div>
 
 
 
@@ -1802,6 +1809,11 @@
     <p style="font-size: 1.1rem;">📞 +91 7384661310</p>
   </div>
 
+  <div id="visitor-count" style="margin-top:20px; font-size:1.1rem;">
+    👀 Visitors: <span id="visitor-number">Loading...</span>
+  </div>
+
+  
   <p style="margin-top: 50px; font-size: 1rem; color: #f0eaea;">
   Designed with ❤️ by Kanan Pandit
 </p>
@@ -1986,7 +1998,6 @@
 
   
 <!-- my changes for fest update 06/03/2026-->
-
 <script>
 
 document.addEventListener("DOMContentLoaded", async function(){
@@ -2011,8 +2022,8 @@ document.addEventListener("DOMContentLoaded", async function(){
     const todayFestival = holidays.find(h => h.date.iso.startsWith(today));
 
     if(todayFestival){
-      greeting.innerText =
-        `🎉 Happy ${todayFestival.name}! Wishing you a wonderful day!`;
+     greeting.innerText =
+  `🎉 Happy ${todayFestival.name}! Warm wishes from Kanan Pandit. May your day be filled with joy and happiness.`;
     }
 
     const upcoming = holidays
@@ -2036,25 +2047,11 @@ document.addEventListener("DOMContentLoaded", async function(){
 
 });
 
-// show current date
-function showCurrentDate(){
+</script>
 
-  const today = new Date();
 
-  const options = {
-    weekday:"long",
-    year:"numeric",
-    month:"short",
-    day:"numeric"
-  };
 
-  const formattedDate = today.toLocaleDateString("en-US", options);
 
-  document.getElementById("current-date").innerText =
-    `📅 Today: ${formattedDate}`;
-}
-
-// showCurrentDate();
   <script>
 
 function showDateTime(){
@@ -2078,26 +2075,68 @@ function showDateTime(){
 
   document.getElementById("current-date").innerText =
     `📅 ${date} | ⏰ ${time}`;
-
 }
 
-// update every second
 setInterval(showDateTime,1000);
-
 showDateTime();
-
-</script>
-  
 
 </script>
 <!-- my changes for fest upadte 06/03/2026 -->
 
 
+<script>
+
+async function loadAINews(){
+
+  const ticker = document.getElementById("ai-news-text");
+
+  try{
+
+    const res = await fetch(
+      "https://newsapi.org/v2/everything?q=artificial%20intelligence&sortBy=publishedAt&apiKey=ae71ed1733f74415b46d0630b5465e91"
+    );
+
+    const data = await res.json();
+
+    const news = data.articles
+      .slice(0,6)
+      .map(n => `🤖 ${n.title}`)
+      .join(" | ");
+
+    ticker.innerText = news;
+
+  }catch(err){
+
+    ticker.innerText = "⚠ Unable to load AI news";
+
+  }
+
+}
+
+loadAINews();
+
+</script>
 
 
 
+<script>
+async function updateVisitorCount(){
+  try{
+    const res = await fetch(
+      "https://api.countapi.xyz/hit/kananpanditportfolio-netlify/visits"
+    );
 
+    const data = await res.json();
 
+    document.getElementById("visitor-number").innerText = data.value;
+
+  }catch(err){
+    document.getElementById("visitor-number").innerText = "N/A";
+  }
+}
+
+updateVisitorCount();
+</script>
 
 
   
