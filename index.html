@@ -777,8 +777,11 @@
   }
 }
 
+
+
+  
 /* my changes start for fest update 06/03/2026 */
-  .news-ticker{
+.news-ticker{
   width:100%;
   background:#111;
   color:#00f2fe;
@@ -794,9 +797,27 @@
   animation:scrollTicker 30s linear infinite;
 }
 
+.news-ticker span:hover{
+  animation-play-state: paused;
+}
+
 @keyframes scrollTicker{
   0%{ transform:translateX(0); }
   100%{ transform:translateX(-100%); }
+}
+
+.festival-greeting{
+  text-align:center;
+  font-size:20px;
+  font-weight:600;
+  padding:10px;
+  color:#ffd700;
+}
+
+.current-date{
+  text-align:center;
+  font-size:16px;
+  color:#00f2fe;
 }
   
 /* my changes end  for fest update 06/03/2026 */
@@ -804,6 +825,8 @@
 
   
 
+
+  
 </style>
 
 
@@ -870,9 +893,13 @@
 
 
 <!-- my chnges 06/03/2026 for live festivel update start -->
-  <div class="news-ticker">
+<div class="news-ticker">
   <span id="ticker-text">Loading latest festivals...</span>
 </div>
+
+<div id="festival-greeting" class="festival-greeting"></div>
+
+<div id="current-date" class="current-date"></div>
 <!-- my chnges 06/03/2026 for live festivel update start -->
 
 
@@ -1963,11 +1990,14 @@
 document.addEventListener("DOMContentLoaded", async function(){
 
   const ticker = document.getElementById("ticker-text");
+  const greeting = document.getElementById("festival-greeting");
+
+  const year = new Date().getFullYear();
 
   try {
 
     const res = await fetch(
-      "https://calendarific.com/api/v2/holidays?api_key=zcdZBJHj9HbuO1fwNqgJMbBXxcdD1qWu&country=IN&year=2026"
+      `https://calendarific.com/api/v2/holidays?api_key=zcdZBJHj9HbuO1fwNqgJMbBXxcdD1qWu&country=IN&year=${year}`
     );
 
     const json = await res.json();
@@ -1976,34 +2006,53 @@ document.addEventListener("DOMContentLoaded", async function(){
 
     const today = new Date().toISOString().split("T")[0];
 
-    // find today's festival
     const todayFestival = holidays.find(h => h.date.iso.startsWith(today));
 
-    // upcoming festivals
+    if(todayFestival){
+      greeting.innerText =
+        `🎉 Happy ${todayFestival.name}! Wishing you a wonderful day!`;
+    }
+
     const upcoming = holidays
       .filter(h => h.date.iso >= today)
       .slice(0,6)
-      .map(h => `${h.name} – ${h.date.iso}`)
+      .map(h => {
+        const d = new Date(h.date.iso);
+        const date = d.toLocaleDateString("en-US",{month:"short",day:"numeric"});
+        return `${h.name} – ${date}`;
+      })
       .join(" | ");
 
-    if(todayFestival){
-      ticker.innerText =
-        `🎉 Today: ${todayFestival.name} | Upcoming: ${upcoming}`;
-    }
-    else{
-      ticker.innerText =
-        `🎉 Upcoming Festivals: ${upcoming}`;
-    }
+    ticker.innerText = `🎉 Upcoming Festivals: ${upcoming}`;
 
   } catch (err) {
 
     ticker.innerText = "⚠ Unable to load festival events";
-
     console.error(err);
 
   }
 
 });
+
+// show current date
+function showCurrentDate(){
+
+  const today = new Date();
+
+  const options = {
+    weekday:"long",
+    year:"numeric",
+    month:"short",
+    day:"numeric"
+  };
+
+  const formattedDate = today.toLocaleDateString("en-US", options);
+
+  document.getElementById("current-date").innerText =
+    `📅 Today: ${formattedDate}`;
+}
+
+showCurrentDate();
 
 </script>
 <!-- my changes for fest upadte 06/03/2026 -->
