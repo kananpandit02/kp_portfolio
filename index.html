@@ -2092,14 +2092,13 @@ async function loadAINews(){
   try{
 
     const res = await fetch(
-      "https://corsproxy.io/?https://newsapi.org/v2/everything?q=artificial%20intelligence&language=en&sortBy=publishedAt&apiKey=ae71ed1733f74415b46d0630b5465e91"
+      "https://api.spaceflightnewsapi.net/v4/articles/?limit=6"
     );
 
     const data = await res.json();
 
-    const news = data.articles
-      .slice(0,6)
-      .map(n => `🤖 ${n.title}`)
+    const news = data.results
+      .map(n => `🚀 ${n.title}`)
       .join(" | ");
 
     ticker.innerText = news;
