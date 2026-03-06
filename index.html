@@ -777,6 +777,32 @@
   }
 }
 
+/* my changes start for fest update 06/03/2026 */
+  .news-ticker{
+  width:100%;
+  background:#111;
+  color:#00f2fe;
+  padding:8px 0;
+  overflow:hidden;
+  white-space:nowrap;
+  font-weight:600;
+}
+
+.news-ticker span{
+  display:inline-block;
+  padding-left:100%;
+  animation:scrollTicker 30s linear infinite;
+}
+
+@keyframes scrollTicker{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-100%); }
+}
+  
+/* my changes end  for fest update 06/03/2026 */
+
+
+  
 
 </style>
 
@@ -840,6 +866,23 @@
       <!-- <li><a href="#additional">More</a></li> -->
     </ul>
   </nav>
+
+
+
+<!-- my chnges 06/03/2026 for live festivel update start -->
+  <div class="news-ticker">
+  <span id="ticker-text">Loading latest festivals...</span>
+</div>
+<!-- my chnges 06/03/2026 for live festivel update start -->
+
+
+
+
+
+
+
+
+  
 
   <!-- <div class="welcome-message">Welcome to My Portfolio</div>
   <div class="color-beam"></div> -->
@@ -1913,11 +1956,54 @@
 
 
   
-<!-- ================================================================ -->
+<!-- my changes for fest update 06/03/2026-->
+
+<script>
+
+async function loadFestivalTicker(){
+
+ const res = await fetch(
+   "https://date.nager.at/api/v3/PublicHolidays/2026/IN"
+ );
+
+ const data = await res.json();
+
+ const today = new Date().toISOString().split("T")[0];
+
+ let todayFestival = data.find(f => f.date === today);
+
+ const ticker = document.getElementById("ticker-text");
+
+ if(todayFestival){
+   ticker.innerText = `🎉 Today: ${todayFestival.name}`;
+ }
+ else{
+
+   const text = data
+     .slice(0,8)
+     .map(f => `${f.name} – ${f.date}`)
+     .join("  |  ");
+
+   ticker.innerText =
+     "🎉 Upcoming Indian Festivals: " + text;
+ }
+
+}
+
+loadFestivalTicker();
+
+</script>
+<!-- my changes for fest upadte 06/03/2026 -->
 
 
-<!-- ================================================================ -->
 
+
+
+
+
+
+
+  
 </body>
 </html>
 
