@@ -1967,27 +1967,32 @@ document.addEventListener("DOMContentLoaded", async function(){
   try {
 
     const res = await fetch(
-      "https://corsproxy.io/?https://date.nager.at/api/v3/PublicHolidays/2026/IN"
+      "https://calendarific.com/api/v2/holidays?api_key=zcdZBJHj9HbuO1fwNqgJMbBXxcdD1qWu&country=IN&year=2026"
     );
 
-    const data = await res.json();
+    const json = await res.json();
+
+    const holidays = json.response.holidays;
 
     const today = new Date().toISOString().split("T")[0];
 
-    const todayFestival = data.find(f => f.date === today);
+    // find today's festival
+    const todayFestival = holidays.find(h => h.date.iso.startsWith(today));
+
+    // upcoming festivals
+    const upcoming = holidays
+      .filter(h => h.date.iso >= today)
+      .slice(0,6)
+      .map(h => `${h.name} – ${h.date.iso}`)
+      .join(" | ");
 
     if(todayFestival){
-      ticker.innerText = `🎉 Today: ${todayFestival.name}`;
-    } 
-    else {
-
-      const text = data
-        .slice(0,8)
-        .map(f => `${f.name} – ${f.date}`)
-        .join("  |  ");
-
-      ticker.innerText = "🎉 Upcoming Festivals: " + text;
-
+      ticker.innerText =
+        `🎉 Today: ${todayFestival.name} | Upcoming: ${upcoming}`;
+    }
+    else{
+      ticker.innerText =
+        `🎉 Upcoming Festivals: ${upcoming}`;
     }
 
   } catch (err) {
