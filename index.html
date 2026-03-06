@@ -813,11 +813,13 @@
   padding:10px;
   color:#ffd700;
 }
-
+  
 .current-date{
   text-align:center;
   font-size:16px;
   color:#00f2fe;
+  font-weight:600;
+  margin-top:4px;
 }
   
 /* my changes end  for fest update 06/03/2026 */
@@ -2052,7 +2054,40 @@ function showCurrentDate(){
     `📅 Today: ${formattedDate}`;
 }
 
-showCurrentDate();
+// showCurrentDate();
+  <script>
+
+function showDateTime(){
+
+  const now = new Date();
+
+  const dateOptions = {
+    weekday:"long",
+    year:"numeric",
+    month:"short",
+    day:"numeric"
+  };
+
+  const date = now.toLocaleDateString("en-US", dateOptions);
+
+  const time = now.toLocaleTimeString("en-US", {
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit"
+  });
+
+  document.getElementById("current-date").innerText =
+    `📅 ${date} | ⏰ ${time}`;
+
+}
+
+// update every second
+setInterval(showDateTime,1000);
+
+showDateTime();
+
+</script>
+  
 
 </script>
 <!-- my changes for fest upadte 06/03/2026 -->
