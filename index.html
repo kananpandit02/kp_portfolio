@@ -1960,37 +1960,45 @@
 
 <script>
 
-async function loadFestivalTicker(){
+document.addEventListener("DOMContentLoaded", async function(){
 
- const res = await fetch(
-   "https://date.nager.at/api/v3/PublicHolidays/2026/IN"
- );
+  const ticker = document.getElementById("ticker-text");
 
- const data = await res.json();
+  try {
 
- const today = new Date().toISOString().split("T")[0];
+    const res = await fetch(
+      "https://date.nager.at/api/v3/PublicHolidays/2026/IN"
+    );
 
- let todayFestival = data.find(f => f.date === today);
+    const data = await res.json();
 
- const ticker = document.getElementById("ticker-text");
+    const today = new Date().toISOString().split("T")[0];
 
- if(todayFestival){
-   ticker.innerText = `🎉 Today: ${todayFestival.name}`;
- }
- else{
+    const todayFestival = data.find(f => f.date === today);
 
-   const text = data
-     .slice(0,8)
-     .map(f => `${f.name} – ${f.date}`)
-     .join("  |  ");
+    if(todayFestival){
+      ticker.innerText = `🎉 Today: ${todayFestival.name}`;
+    } 
+    else {
 
-   ticker.innerText =
-     "🎉 Upcoming Indian Festivals: " + text;
- }
+      const text = data
+        .slice(0,8)
+        .map(f => `${f.name} – ${f.date}`)
+        .join("  |  ");
 
-}
+      ticker.innerText = "🎉 Upcoming Festivals: " + text;
 
-loadFestivalTicker();
+    }
+
+  } catch (err) {
+
+    ticker.innerText = "⚠ Unable to load festival events";
+
+    console.error(err);
+
+  }
+
+});
 
 </script>
 <!-- my changes for fest upadte 06/03/2026 -->
