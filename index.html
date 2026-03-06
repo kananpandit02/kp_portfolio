@@ -2083,7 +2083,6 @@ showDateTime();
 </script>
 <!-- my changes for fest upadte 06/03/2026 -->
 
-
 <script>
 
 async function loadAINews(){
@@ -2093,7 +2092,7 @@ async function loadAINews(){
   try{
 
     const res = await fetch(
-      "https://newsapi.org/v2/everything?q=artificial%20intelligence&sortBy=publishedAt&apiKey=ae71ed1733f74415b46d0630b5465e91"
+      "https://corsproxy.io/?https://newsapi.org/v2/everything?q=artificial%20intelligence&language=en&sortBy=publishedAt&apiKey=ae71ed1733f74415b46d0630b5465e91"
     );
 
     const data = await res.json();
@@ -2109,6 +2108,8 @@ async function loadAINews(){
 
     ticker.innerText = "⚠ Unable to load AI news";
 
+    console.error(err);
+
   }
 
 }
@@ -2120,8 +2121,11 @@ loadAINews();
 
 
 <script>
+
 async function updateVisitorCount(){
+
   try{
+
     const res = await fetch(
       "https://api.countapi.xyz/hit/kananpanditportfolio-netlify/visits"
     );
@@ -2131,11 +2135,15 @@ async function updateVisitorCount(){
     document.getElementById("visitor-number").innerText = data.value;
 
   }catch(err){
-    document.getElementById("visitor-number").innerText = "N/A";
+
+    document.getElementById("visitor-number").innerText = "0";
+
   }
+
 }
 
 updateVisitorCount();
+
 </script>
 
 
