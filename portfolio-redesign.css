@@ -529,3 +529,10 @@ footer { padding-left: max(20px, env(safe-area-inset-left)) !important; padding-
     transform: none;
   }
 }
+
+
+/* Guard against embedded/zoomed viewports narrower than a usable mobile layout. */
+@media (max-width: 319px) {
+  html, body { min-width: 320px; }
+  body { overflow-x: auto; }
+}
