@@ -588,25 +588,37 @@
     <i data-lucide="moon" id="theme-icon"></i>
   </button>
 
-  <header class="animated-header" style="text-align: center; color: white; padding-top: 60px; font-family: Arial, sans-serif;">
-    
-    <!-- Intro Typing -->
-    <h3>
-      <span id="typed-intro" style="color: #FFA500; font-weight: 700; font-size: 1.8rem; text-shadow: 1px 1px 2px black;"></span>
-    </h3>
-
-    <!-- Static line -->
-    <h3 style="color: #e0e0e0; font-weight: 600; margin: 10px 0; font-size: 1.6rem;">
-      AI Engineer building intelligent applications
-    </h3>
-
-    <!-- Skills Typing -->
-    <h3>
-      I am into 
-      <span id="typed-skills" style="color: #00FFFF; font-weight: 700; font-size: 1.8rem; text-shadow: 1px 1px 2px black;"></span>
-    </h3>
-
-  </header>
+  <header class="animated-header" aria-labelledby="hero-title">
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <p class="hero-eyebrow"><span class="hero-status-dot"></span> AI/ML ENGINEER · AGENTIC AI · PRODUCT BUILDER</p>
+      <p class="hero-kicker"><span id="typed-intro">Hello, I'm Kanan</span></p>
+      <h1 id="hero-title">I turn complex problems into <span class="hero-gradient-text">intelligent products.</span></h1>
+      <p class="hero-description">I build AI-powered applications, agentic workflows and connected software experiences — combining practical engineering with a data-driven mindset.</p>
+      <p class="hero-specialty">Currently exploring <span id="typed-skills">AI agents & intelligent systems</span></p>
+      <div class="hero-actions">
+        <a class="hero-primary" href="#projects">Explore my work <span aria-hidden="true">↗</span></a>
+        <a class="hero-secondary" href="KananPandit_Resume.pdf" target="_blank" rel="noopener">View résumé <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-links">
+        <a href="https://github.com/kananpandit02" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://linkedin.com/in/kananpandit02" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="#get-in-touch">Contact ↗</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="AI engineering focus areas">
+      <div class="hero-orbit hero-orbit-one"></div>
+      <div class="hero-orbit hero-orbit-two"></div>
+      <div class="hero-profile-frame">
+        <img src="my_pic.png" alt="Portrait of Kanan Pandit" class="hero-profile-image" />
+        <div class="hero-profile-caption"><span class="hero-status-dot"></span><span><strong>Kanan Pandit</strong><small>AI/ML Engineer</small></span></div>
+      </div>
+      <div class="hero-float-card hero-float-top"><span class="hero-float-icon">✳</span><span><strong>Agentic AI</strong><small>Reason · Act · Iterate</small></span></div>
+      <div class="hero-float-card hero-float-bottom"><span class="hero-float-icon cyan">⌘</span><span><strong>AI + Engineering</strong><small>From APIs to applications</small></span></div>
+      <div class="hero-visual-label">BUILDING WHAT'S NEXT <span>✦</span></div>
+    </div>
+  </div>
+</header>
 
   <!-- Typed.js -->
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
