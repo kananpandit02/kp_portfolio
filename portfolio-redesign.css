@@ -207,3 +207,6 @@ header.animated-header::before {
   #projects .project-item { flex-direction:row; padding:16px !important; gap:13px; }
   #projects .project-logo { width:55px !important; height:55px !important; flex-basis:55px; }
 }
+
+.section-intro { max-width:720px; margin:-4px 0 26px; color:#98a4bd !important; font-size:1rem; }
+#about-me-section .about-text h2 { max-width:620px; line-height:1.18; }
