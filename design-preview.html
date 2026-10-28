@@ -14,12 +14,25 @@
 .ai-chatbot-btn{position:fixed;right:22px;bottom:24px;z-index:9999;display:flex;align-items:center;gap:10px;padding:14px 18px;border:1px solid #5bd8ff88;border-radius:999px;color:#f5fbff;background:linear-gradient(110deg,#087fae,#5542c7 72%,#8d38c4);font:700 .9rem "DM Sans",sans-serif;box-shadow:0 10px 35px #1565d64d;cursor:pointer;animation:chatPulse 3s ease-in-out infinite,chatFloat 5s ease-in-out infinite;transition:transform .2s,box-shadow .2s}.ai-chatbot-btn:hover{transform:translateY(-4px);box-shadow:0 14px 42px #2563eb70}.ai-chatbot-btn>span:first-child{font-size:1.35rem}.ai-chatbot-btn.opened{animation:none}.ai-ripple{position:absolute;inset:-5px;border:1px solid #4fd7ff66;border-radius:999px;pointer-events:none;animation:chatRipple 3.8s infinite}.chatbot-label{white-space:nowrap}@keyframes chatPulse{0%,100%{box-shadow:0 10px 35px #1565d64d}50%{box-shadow:0 10px 38px #5d45ff88}}@keyframes chatFloat{0%,100%{translate:0 0}50%{translate:0 -4px}}@keyframes chatRipple{0%{transform:scale(.98);opacity:.85}100%{transform:scale(1.12);opacity:0}}@media(max-width:650px){.ai-chatbot-btn{right:14px;bottom:14px;padding:12px 15px}.chatbot-label{font-size:.82rem}}@media(prefers-reduced-motion:reduce){.ai-chatbot-btn,.ai-ripple{animation:none!important}}
 /* Rotating expertise line and visitor message form */
 .typed-lead{color:#8be8ff;font-weight:700;white-space:nowrap}.typed-cursor{color:#8be8ff;font-weight:500;animation:cursorBlink .8s steps(2,start) infinite}.accent-cursor{color:#b7a3ff}@keyframes cursorBlink{to{visibility:hidden}}.muted-intro{margin-top:-10px!important}.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.85fr);gap:22px;align-items:stretch}.contact-grid .contact-panel{grid-template-columns:1fr;align-content:center}.message-form{display:flex;flex-direction:column;gap:10px;padding:28px;border-radius:24px;border:1px solid #6b80bf45;background:linear-gradient(145deg,#101d31,#111226);box-shadow:0 20px 55px #0002}.message-form h3{font-size:1.45rem;margin:0}.form-subtitle,.privacy-note{color:var(--muted);font-size:.88rem;margin:0 0 8px}.message-form label{font-size:.88rem;color:#c5d5f1}.message-form input,.message-form textarea{width:100%;padding:12px 13px;border:1px solid #667ba044;border-radius:12px;background:#081323;color:var(--text);font:inherit;outline:none}.message-form input:focus,.message-form textarea:focus{border-color:#63d9ff;box-shadow:0 0 0 3px #63d9ff1c}.message-form textarea{resize:vertical}.message-form button{align-self:flex-start;margin-top:4px}.message-form button:disabled{opacity:.65;cursor:wait}.form-response{min-height:1.2em;margin:0;font-size:.9rem}.privacy-note{margin-top:0;font-size:.78rem}@media(max-width:760px){.contact-grid{grid-template-columns:1fr}.typed-lead{white-space:normal}}
+
+/* Corner-to-corner rotating capability cards: keep the portrait center clear */
+.hero-art{position:relative;isolation:isolate;padding:26px 24px 30px}
+.portrait-frame{z-index:1;width:min(290px,72%);height:350px}
+.float-chip{z-index:4;pointer-events:none;max-width:clamp(145px,18vw,205px);padding:10px 13px;border-radius:14px;background:rgba(9,19,39,.96);border-color:#3b8dcf88;box-shadow:0 10px 28px #0006;transition:top .85s ease,left .85s ease,right .85s ease,bottom .85s ease,opacity .45s ease;will-change:top,left,right,bottom;overflow-wrap:anywhere}
+.float-chip b{font-size:clamp(.94rem,1.5vw,1.18rem);line-height:1.25}
+.float-chip small{display:block;margin-top:4px;line-height:1.3;font-size:.78rem}
+.chip-a{top:18px;right:0;left:auto;bottom:auto}
+.chip-b{bottom:16px;left:0;right:auto;top:auto;max-width:230px;width:auto}
+.float-chip.is-changing{opacity:.78}
+@media(max-width:900px){.hero-art{padding:20px 16px 24px}.portrait-frame{width:min(270px,70%);height:320px}.chip-a{top:12px;right:0}.chip-b{bottom:12px;left:0;max-width:205px}}
+@media(max-width:650px){.hero-art{min-height:330px;padding:18px 12px 24px;overflow:visible}.portrait-frame{width:220px;height:275px}.float-chip{max-width:165px;padding:8px 10px}.float-chip b{font-size:.92rem}.float-chip small{font-size:.72rem}.chip-a{top:8px;right:0}.chip-b{bottom:8px;left:0;max-width:180px}}
+@media(prefers-reduced-motion:reduce){.float-chip{transition:none}}
 </style>
 </head>
 <body>
 <div class="topbar"><nav class="nav wrap" aria-label="Main navigation"><a class="brand" href="#home">Kanan <span>Pandit</span></a><div class="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#contact">Contact</a></div><a class="pill" href="KananPandit_Resume.pdf" target="_blank" rel="noopener">Download CV <span aria-hidden="true">↓</span></a></nav></div>
 <main>
-<section class="hero wrap" id="home"><div class="hero-copy"><div class="role-tag">AI Engineer · LLM Specialist · Full-Stack Developer</div><h1>I turn complex problems into <span class="gradient-text">intelligent products.</span></h1><p class="intro">Hi, I’m Kanan Pandit — <span class="typed-lead" aria-label="AI and machine learning engineer"><span id="typed-skills">Machine Learning</span><span class="typed-cursor">|</span></span> enthusiast building practical AI systems.</p><p class="intro muted-intro">I am into <span id="typed-focus" class="gradient-text">Deep Learning</span><span class="typed-cursor accent-cursor">|</span>, computer vision, LLM applications, and distributed computing.</p><div class="actions"><a class="pill" href="#projects">View My Work <span aria-hidden="true">→</span></a><a class="pill ghost" href="#contact">Contact Me</a></div><div class="socials"><a href="https://github.com/kananpandit02" aria-label="GitHub">GH</a><a href="https://www.linkedin.com/" aria-label="LinkedIn">in</a><a href="mailto:kananpandit02@gmail.com" aria-label="Email">✉</a></div></div><div class="hero-art" aria-label="Portrait and animated visual accents"><div class="orbit"></div><span class="spark s1"></span><span class="spark s2"></span><div class="float-chip chip-a"><b>AI + LLM</b><small>Applied intelligence</small></div><div class="float-chip chip-b"><b>Build · Ship · Improve</b><small>Practical product mindset</small></div><div class="portrait-frame"><img src="my_pic.png" alt="Portrait of Kanan Pandit" onerror="this.onerror=null;this.src='profile.jpg'"><div class="portrait-caption"><strong>Kanan Pandit</strong><span>AI Engineer & Developer</span></div></div></div></section>
+<section class="hero wrap" id="home"><div class="hero-copy"><div class="role-tag">AI Engineer · LLM Specialist · Full-Stack Developer</div><h1>I turn complex problems into <span class="gradient-text">intelligent products.</span></h1><p class="intro">Hi, I’m Kanan Pandit — <span class="typed-lead" aria-label="AI and machine learning engineer"><span id="typed-skills">Machine Learning</span><span class="typed-cursor">|</span></span> enthusiast building practical AI systems.</p><p class="intro muted-intro">I am into <span id="typed-focus" class="gradient-text">Deep Learning</span><span class="typed-cursor accent-cursor">|</span>, computer vision, LLM applications, and distributed computing.</p><div class="actions"><a class="pill" href="#projects">View My Work <span aria-hidden="true">→</span></a><a class="pill ghost" href="#contact">Contact Me</a></div><div class="socials"><a href="https://github.com/kananpandit02" aria-label="GitHub">GH</a><a href="https://www.linkedin.com/" aria-label="LinkedIn">in</a><a href="mailto:kananpandit02@gmail.com" aria-label="Email">✉</a></div></div><div class="hero-art" aria-label="Portrait and animated visual accents"><div class="orbit"></div><span class="spark s1"></span><span class="spark s2"></span><div class="float-chip chip-a" aria-live="polite"><b id="orbit-title">AI + LLM</b><small id="orbit-subtitle">Applied intelligence</small></div><div class="float-chip chip-b"><b id="orbit-title-secondary">Build · Ship · Improve</b><small id="orbit-subtitle-secondary">Practical product mindset</small></div><div class="portrait-frame"><img src="my_pic.png" alt="Portrait of Kanan Pandit" onerror="this.onerror=null;this.src='profile.jpg'"><div class="portrait-caption"><strong>Kanan Pandit</strong><span>AI Engineer & Developer</span></div></div></div></section>
 <section class="section" id="about"><div class="wrap"><div class="section-head reveal"><div><div class="eyebrow">About me</div><h2>Curious mind. Practical builder.</h2></div><p class="section-lead">I enjoy turning complex ideas into useful, user-focused technology.</p></div><div class="about-grid"><article class="glass about-copy reveal"><div class="eyebrow">A little about me</div><p>I work across AI/ML, LLM-powered applications, and full-stack development. I like exploring new ideas, solving real problems, and building systems that are practical, reliable, and easy to use.</p><a class="pill ghost" href="#experience">Explore my journey →</a></article><article class="glass reveal"><div class="feature"><div class="feature-icon">✳</div><div><h3>AI & LLMs</h3><p>Agents, retrieval workflows, and intelligent applications.</p></div></div><div class="feature"><div class="feature-icon">⌘</div><div><h3>Full Stack</h3><p>End-to-end development and API integrations.</p></div></div><div class="feature"><div class="feature-icon">↗</div><div><h3>Problem Solving</h3><p>Turning complex challenges into usable products.</p></div></div></article><article class="glass education reveal"><div><div class="cap">✦</div><div class="eyebrow">Education</div><h3 style="margin-top:12px">M.Sc. in Big Data Analytics</h3><p>Alongside a B.Sc. in Mathematics and B.Ed.</p></div><div class="location">⌖ India</div></article></div></div></section>
 <section class="section" id="skills"><div class="wrap"><div class="section-head reveal"><div><div class="eyebrow">My toolkit</div><h2>Technical skills</h2></div><p class="section-lead">The full skills list from your existing portfolio, grouped so visitors can scan it quickly.</p></div><div class="skill-groups">
 <article class="glass reveal"><h3>Programming Languages</h3><div class="tags"><span>Python</span><span>C</span><span>R</span><span>Java</span><span>SQL</span><span>LaTeX</span></div></article>
@@ -66,6 +79,44 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Contact form error:",error);
     }finally{button.disabled=false;button.innerHTML='Send message <span aria-hidden="true">→</span>';}
   });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+ const art=document.querySelector(".hero-art");
+ const portrait=document.querySelector(".portrait-frame");
+ const cards=[
+  {el:document.querySelector(".chip-a"),title:document.getElementById("orbit-title"),sub:document.getElementById("orbit-subtitle"),items:[
+   ["AI + LLM","Applied intelligence"],["Machine Learning","Models that learn"],["Computer Vision","Seeing patterns in images"],["Generative AI","Creating new possibilities"],["NLP & RAG","Grounded language systems"]
+  ]},
+  {el:document.querySelector(".chip-b"),title:document.getElementById("orbit-title-secondary"),sub:document.getElementById("orbit-subtitle-secondary"),items:[
+   ["Build · Ship · Improve","Practical product mindset"],["Distributed Systems","Scale beyond one machine"],["AI Agents","Tools that get work done"],["Data to Decisions","Analytics with purpose"],["Full-Stack Engineering","From interface to API"]
+  ]}
+ ];
+ if(!art||!portrait||cards.some(c=>!c.el||!c.title||!c.sub))return;
+ const positions=[
+  [{top:"12px",right:"0",bottom:"auto",left:"auto"},{top:"auto",right:"0",bottom:"12px",left:"auto"}],
+  [{top:"12px",right:"auto",bottom:"auto",left:"0"},{top:"auto",right:"auto",bottom:"12px",left:"0"}],
+  [{top:"auto",right:"0",bottom:"12px",left:"auto"},{top:"12px",right:"auto",bottom:"auto",left:"0"}],
+  [{top:"auto",right:"auto",bottom:"12px",left:"0"},{top:"12px",right:"0",bottom:"auto",left:"auto"}]
+ ];
+ let index=0;
+ function moveCards(){
+  index=(index+1)%positions.length;
+  cards.forEach((card,i)=>{
+   const p=positions[index][i];
+   card.el.classList.add("is-changing");
+   Object.assign(card.el.style,p);
+   const item=card.items[(index+i)%card.items.length];
+   card.title.textContent=item[0];card.sub.textContent=item[1];
+   window.setTimeout(()=>card.el.classList.remove("is-changing"),420);
+  });
+ }
+ // Keep cards pinned to the four outer corners; the portrait remains above neither card.
+ cards.forEach(card=>card.el.style.position="absolute");
+ window.setInterval(moveCards,3200);
 });
 </script>
 
