@@ -1,0 +1,102 @@
+/* Kanan Pandit portfolio redesign — additive overrides, preserving existing integrations */
+:root {
+  --bg-color: #080b14;
+  --text-color: #edf2ff;
+  --accent-color: #a78bfa;
+  --card-bg: rgba(17, 24, 39, .76);
+  --kp-muted: #aab4cc;
+  --kp-border: rgba(167, 139, 250, .20);
+}
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  background: radial-gradient(ellipse at 18% 0%, rgba(88, 56, 160, .22), transparent 38%), #080b14 !important;
+  color: var(--text-color) !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  line-height: 1.7;
+}
+#vanta-bg { opacity: .20; pointer-events: none; }
+.site-header { max-width: 1200px; margin: 0 auto; padding: 18px 28px !important; align-items: center !important; }
+.site-logo { width: 150px !important; max-height: 64px; object-fit: contain; }
+header.animated-header, body > header.animated-header {
+  max-width: 1200px; margin: 34px auto 22px !important; padding: clamp(54px, 9vw, 110px) 28px !important;
+  border: 1px solid var(--kp-border); border-radius: 30px;
+  background: linear-gradient(135deg, rgba(22, 27, 48, .96), rgba(12, 15, 29, .93)) !important;
+  box-shadow: 0 28px 80px rgba(0,0,0,.28); background-attachment: initial !important;
+  animation: none !important;
+}
+header.animated-header h1, header.animated-header h2, header.animated-header h3 {
+  font-family: inherit !important; line-height: 1.18; letter-spacing: -.035em;
+}
+header.animated-header h3 { font-size: clamp(1.15rem, 2.6vw, 1.65rem) !important; margin: 12px 0; }
+#typed-intro { color: #c4b5fd !important; font-size: clamp(2rem, 5.8vw, 4.6rem) !important; text-shadow: none !important; }
+#typed-skills { color: #67e8f9 !important; font-size: clamp(1.2rem, 3vw, 2rem) !important; text-shadow: none !important; }
+nav {
+  position: sticky; top: 0; z-index: 1000; padding: 8px 16px;
+  background: rgba(8, 11, 20, .88) !important; backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.08);
+}
+nav ul { max-width: 1200px; margin: auto; justify-content: center; gap: 8px !important; padding: 8px !important; }
+nav ul li a {
+  display: inline-flex; align-items: center; color: #dce4f8 !important; font-size: .92rem;
+  font-weight: 600 !important; padding: 9px 13px !important; border-radius: 999px !important;
+  background: transparent !important; box-shadow: none !important; text-decoration: none;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+nav ul li a:hover { background: rgba(167,139,250,.15) !important; color: #fff !important; transform: translateY(-1px); }
+section, #about-me-section {
+  width: min(1120px, calc(100% - 40px)); max-width: 1120px !important;
+  margin: 26px auto !important; padding: clamp(24px, 4vw, 44px) !important;
+  background: rgba(15, 20, 36, .86) !important; color: #edf2ff !important;
+  border: 1px solid rgba(255,255,255,.085); border-radius: 24px !important;
+  box-shadow: 0 18px 55px rgba(0,0,0,.18) !important; backdrop-filter: blur(12px);
+}
+section h2, #about-me-section .about-text h2 {
+  color: #c4b5fd !important; font-size: clamp(1.55rem, 3vw, 2.2rem) !important;
+  letter-spacing: -.025em; margin-bottom: 22px !important;
+}
+section p, section li, #about-me-section p { color: #c5cde0; line-height: 1.75; }
+#about-me-section { background: rgba(15,20,36,.86) !important; color: #edf2ff !important; font-family: inherit !important; }
+#about-me-section .about-text { opacity: 1; transform: none; }
+#about-me-section .about-photo img { filter: none; border-radius: 22px; max-height: 390px; }
+.project-item, .skill-group, .interest-item, .additional-item, .coursework-item, .education-item, .activity-item {
+  background: linear-gradient(145deg, rgba(30, 38, 62, .94), rgba(17, 23, 40, .94)) !important;
+  color: #e7ecfa !important; border: 1px solid var(--kp-border); border-radius: 18px !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.16) !important;
+}
+.project-item { align-items: center; }
+.project-content h3, .education-info h3 { color: #c4b5fd !important; border-color: rgba(167,139,250,.28) !important; }
+.project-content p, .skill-group p, .education-info p { color: #c5cde0 !important; }
+.project-logo, .education-logo { border-radius: 14px !important; }
+.interest-item, .additional-item, .coursework-item { font-size: .95rem !important; padding: 11px 16px !important; }
+.download-btn, .project-item a, #contact-form button {
+  background: linear-gradient(135deg, #a78bfa, #67e8f9) !important; color: #080b14 !important;
+  border: 0 !important; border-radius: 999px !important; font-weight: 750 !important;
+  box-shadow: 0 8px 24px rgba(103,232,249,.12);
+}
+input, textarea { background: #0b1020 !important; color: #f3f6ff !important; border: 1px solid rgba(167,139,250,.25) !important; }
+input::placeholder, textarea::placeholder { color: #8793ad !important; }
+.color-beam { height: 2px !important; max-width: 1080px; margin: 28px auto !important; background: linear-gradient(90deg, transparent, #a78bfa, #67e8f9, transparent) !important; box-shadow: none !important; }
+.news-ticker { background: #11172a !important; color: #c4b5fd !important; }
+footer { background: #080b14 !important; border-top: 1px solid rgba(255,255,255,.09); color: #aab4cc !important; }
+footer h3, footer h4 { color: #c4b5fd !important; }
+.quick-link { color: #c5cde0 !important; }
+.theme-toggle { top: 16px; right: 18px; background: #171d31 !important; color: white; border: 1px solid var(--kp-border); }
+#scroll-buttons button { background: #a78bfa !important; }
+.ai-chatbot-btn { right: 18px !important; width: 60px !important; height: 60px !important; }
+@media (max-width: 700px) {
+  .site-header { padding: 14px 18px !important; }
+  nav ul { gap: 4px !important; }
+  nav ul li a { font-size: .82rem; padding: 7px 10px !important; }
+  header.animated-header { width: calc(100% - 24px); margin: 18px auto !important; padding: 54px 18px !important; border-radius: 22px; }
+  section, #about-me-section { width: calc(100% - 24px); margin: 16px auto !important; padding: 22px 18px !important; }
+  .project-item { flex-direction: column; min-width: 0 !important; }
+  .project-logo { width: 100px !important; height: 100px !important; }
+  .education-item { align-items: flex-start; flex-wrap: wrap; }
+  .education-logo { width: 84px !important; height: 84px !important; margin-right: 14px !important; }
+  .theme-toggle { top: 10px; right: 10px; }
+  .ai-chatbot-btn { top: auto !important; bottom: 20px !important; transform: none !important; width: 52px !important; height: 52px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  #vanta-bg { display: none; }
+}
