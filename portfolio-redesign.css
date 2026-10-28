@@ -403,3 +403,129 @@ footer { padding-left: max(20px, env(safe-area-inset-left)) !important; padding-
 @supports (padding: max(0px)) {
   body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
 }
+
+
+/* Final responsive design pass — refined desktop hierarchy and comfortable mobile layouts */
+@media (min-width: 1100px) {
+  header.animated-header { margin-top: 30px !important; }
+  .hero-layout { gap: clamp(38px, 5vw, 78px); }
+  .hero-visual { min-height: 510px; }
+  .hero-profile-frame { width: min(78%, 350px); }
+  #projects .project-boxes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  section { scroll-margin-top: 96px; }
+}
+@media (min-width: 851px) {
+  nav { position: sticky; }
+  nav ul { flex-wrap: wrap; }
+  #projects .project-item { min-height: 180px; }
+  .hero-proof-strip { gap: 20px; }
+}
+@media (max-width: 850px) {
+  header.animated-header { margin-top: 18px !important; }
+  .hero-layout { grid-template-columns: minmax(0, 1fr); }
+  .hero-copy { order: 1; }
+  .hero-visual { order: 2; }
+  .hero-proof-strip { max-width: 100%; }
+  #projects .project-boxes { grid-template-columns: minmax(0, 1fr); }
+  section, #about-me-section { scroll-margin-top: 24px; }
+}
+@media (max-width: 600px) {
+  html { scroll-padding-top: 16px; }
+  body { font-size: 15px; }
+  .site-header { gap: 10px; }
+  nav {
+    position: relative !important;
+    top: auto;
+    padding: 6px 8px !important;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav ul {
+    width: max-content;
+    max-width: none;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    gap: 4px !important;
+    padding: 5px 4px !important;
+    margin: 0;
+  }
+  nav ul li { flex: 0 0 auto; }
+  nav ul li a { white-space: nowrap; padding: 8px 11px !important; }
+  header.animated-header {
+    width: calc(100% - 20px) !important;
+    margin: 12px auto 18px !important;
+    padding: 28px 17px 22px !important;
+    border-radius: 22px !important;
+  }
+  .hero-eyebrow { margin-bottom: 17px; line-height: 1.6; }
+  .hero-kicker { font-size: .98rem !important; }
+  #hero-title {
+    font-size: clamp(2.15rem, 10.8vw, 3.2rem) !important;
+    line-height: 1.06;
+    letter-spacing: -.055em;
+    margin-bottom: 16px;
+  }
+  .hero-description { font-size: .96rem; line-height: 1.72; }
+  .hero-specialty { font-size: .86rem; margin-bottom: 20px; }
+  .hero-actions { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .hero-actions a { width: 100%; min-height: 48px; }
+  .hero-links { gap: 18px; }
+  .hero-visual { width: 100%; min-height: 330px; margin-top: 0; }
+  .hero-profile-frame { width: min(62%, 230px); }
+  .hero-float-card { max-width: 58%; padding: 9px 10px; }
+  .hero-float-card strong { font-size: .75rem; }
+  .hero-float-card small { font-size: .65rem; }
+  .hero-float-top { top: 5%; right: 0; }
+  .hero-float-bottom { bottom: 8%; left: 0; }
+  .hero-visual-label { bottom: 0; font-size: .5rem; }
+  .hero-proof-strip { grid-template-columns: minmax(0, 1fr); padding-top: 17px; gap: 11px; }
+  .hero-proof-strip > div { gap: 12px; }
+  section, #about-me-section {
+    width: calc(100% - 20px) !important;
+    margin: 12px auto !important;
+    padding: 22px 16px !important;
+    border-radius: 20px !important;
+  }
+  section h2, #about-me-section .about-text h2 { font-size: 1.55rem !important; }
+  .section-intro { font-size: .92rem; }
+  #projects .project-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 15px !important;
+    gap: 12px;
+  }
+  #projects .project-logo { width: 54px !important; height: 54px !important; flex: 0 0 54px; }
+  #projects .project-content h3 { font-size: 1rem; }
+  #projects .project-content p { font-size: .86rem; line-height: 1.65; }
+  .education-item { gap: 8px; padding: 14px !important; }
+  .education-info { flex: 1 1 170px; min-width: 0; }
+  .education-info h3 { font-size: 1.05rem !important; }
+  .education-info p { font-size: .88rem !important; }
+  .interest-boxes, .additional-boxes, .coursework-boxes, .skills-boxes { gap: 10px; }
+  .interest-item, .additional-item, .coursework-item { padding: 9px 12px !important; font-size: .84rem !important; }
+  .skill-group { min-width: 0; flex-basis: 100%; padding: 17px !important; }
+  #contact-form { gap: 12px; }
+  #contact-form button { min-height: 48px; width: 100%; }
+  .theme-toggle { top: 10px !important; right: 10px !important; width: 40px; height: 40px; }
+  .ai-chatbot-btn { right: 12px !important; bottom: 14px !important; }
+  footer { padding: 24px 16px !important; }
+}
+@media (max-width: 360px) {
+  header.animated-header { padding-left: 14px !important; padding-right: 14px !important; }
+  #hero-title { font-size: 2.05rem !important; }
+  .hero-visual { min-height: 300px; }
+  .hero-profile-frame { width: 64%; }
+  .hero-float-card { max-width: 61%; }
+  #projects .project-item { gap: 9px; padding: 12px !important; }
+  #projects .project-logo { width: 46px !important; height: 46px !important; flex-basis: 46px; }
+}
+@media (hover: none) {
+  .hero-primary:hover, .hero-secondary:hover, .project-item:hover, .skill-group:hover,
+  .interest-item:hover, .additional-item:hover, .coursework-item:hover, .education-item:hover {
+    transform: none;
+  }
+}
