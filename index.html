@@ -563,23 +563,6 @@
   }
 </style>
 </head>
-  <script>
-    window.addEventListener('scroll', function () {
-      const aboutSection = document.querySelector('#about-me-section');
-      const aboutText = document.querySelector('.about-text');
-      const position = aboutSection.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.3;
-
-      if (position < screenPosition) {
-        aboutSection.classList.add('show');
-        aboutText.classList.add('show');
-      }
-    });
-  </script>
-</body>
-
-
-
 
 <body>
   <div id="vanta-bg"></div>
@@ -604,6 +587,11 @@
         <a href="https://github.com/kananpandit02" target="_blank" rel="noopener">GitHub ↗</a>
         <a href="https://linkedin.com/in/kananpandit02" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a href="#get-in-touch">Contact ↗</a>
+      </div>
+      <div class="hero-proof-strip" aria-label="Engineering focus areas">
+        <div><span class="proof-index">01</span><span><strong>Applied AI</strong><small>Models · LLM workflows</small></span></div>
+        <div><span class="proof-index">02</span><span><strong>Agentic systems</strong><small>Tools · orchestration</small></span></div>
+        <div><span class="proof-index">03</span><span><strong>Product engineering</strong><small>APIs · usable software</small></span></div>
       </div>
     </div>
     <div class="hero-visual" aria-label="AI engineering focus areas">
@@ -659,7 +647,7 @@
       if (skillsCursor) skillsCursor.style.color = '#00FFFF'; // bright aqua
     });
   </script>
-</body>
+
 
 
 
@@ -681,8 +669,6 @@
   <h2>I'm Kanan Pandit </h2>
   <h3>Welcome to My Portfolio</h3> 
   -->
-
-</header>
 
 <style>
   header.animated-header {
