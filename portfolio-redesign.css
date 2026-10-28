@@ -210,3 +210,34 @@ header.animated-header::before {
 
 .section-intro { max-width:720px; margin:-4px 0 26px; color:#98a4bd !important; font-size:1rem; }
 #about-me-section .about-text h2 { max-width:620px; line-height:1.18; }
+
+
+/* Signature details: memorable, high-contrast hierarchy without fake metrics */
+.hero-proof-strip {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px;
+  max-width:680px; margin-top:30px; padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.10);
+}
+.hero-proof-strip > div { display:flex; align-items:flex-start; gap:10px; min-width:0; }
+.proof-index { color:#67e8f9; font:800 .72rem/1.4 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing:.06em; }
+.hero-proof-strip strong { display:block; color:#e9e8fb; font-size:.79rem; line-height:1.45; }
+.hero-proof-strip small { display:block; margin-top:4px; color:#8490aa; font-size:.7rem; line-height:1.45; }
+.hero-profile-frame::before { content:""; position:absolute; inset:-7px; z-index:-1; border:1px solid rgba(103,232,249,.25); border-radius:35px; transform:rotate(-5deg); }
+.hero-float-card { animation: kp-card-drift 6s ease-in-out infinite; }
+.hero-float-bottom { animation-delay:-3s; }
+@keyframes kp-card-drift { 0%,100% { translate:0 0; } 50% { translate:0 -7px; } }
+nav { box-shadow:0 10px 30px rgba(0,0,0,.12); }
+section h2 { position:relative; }
+section h2::after { content:""; display:block; width:48px; height:3px; margin-top:12px; border-radius:5px; background:linear-gradient(90deg,#a78bfa,#67e8f9); }
+#projects .project-item { position:relative; overflow:hidden; }
+#projects .project-item::after { content:""; position:absolute; inset:auto -35px -55px auto; width:120px; height:120px; border:1px solid rgba(103,232,249,.12); border-radius:50%; pointer-events:none; }
+#projects .project-item:hover { border-color:rgba(103,232,249,.38); transform:translateY(-4px); box-shadow:0 20px 44px rgba(0,0,0,.28) !important; }
+.hero-primary:focus-visible,.hero-secondary:focus-visible,.hero-links a:focus-visible { outline:3px solid #67e8f9; outline-offset:4px; }
+@media(max-width:600px) {
+  .hero-proof-strip { grid-template-columns:1fr; gap:12px; margin-top:24px; }
+  .hero-proof-strip > div { align-items:center; }
+  .hero-proof-strip small { margin-top:1px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .hero-float-card { animation:none !important; }
+}
