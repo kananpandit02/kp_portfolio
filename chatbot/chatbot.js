@@ -36,7 +36,7 @@
       justify-content:space-between;
       align-items:center;
     ">
-      🤖 Ask about Kanan Pandit
+      🤖 KAI · Kanan’s AI Assistant
       <span id="ai-close" style="cursor:pointer;font-size:18px">✕</span>
     </div>
 
@@ -136,7 +136,7 @@
   /* ================= WELCOME ================= */
   add(
     "AI",
-    "Hi 👋 I’m Kanan Pandit’s AI assistant. Ask me about his skills, projects, or experience."
+    "Hi 👋 I’m KAI (Kanan’s AI Assistant). Ask me about Kanan’s skills, projects, experience, or AI work."
   );
 
   /* ================= TEXT SEND ================= */
