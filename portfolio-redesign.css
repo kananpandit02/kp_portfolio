@@ -241,3 +241,56 @@ section h2::after { content:""; display:block; width:48px; height:3px; margin-to
 @media(prefers-reduced-motion:reduce) {
   .hero-float-card { animation:none !important; }
 }
+
+
+/* Portrait-led first impression: make Kanan's real profile photo the visual anchor */
+.hero-visual {
+  min-height: clamp(440px, 43vw, 540px);
+  background: radial-gradient(ellipse at 50% 48%, rgba(93, 65, 226, .24), transparent 54%);
+}
+.hero-profile-frame {
+  width: min(78%, 330px);
+  aspect-ratio: 4 / 5;
+  padding: 7px;
+  border-radius: 34px;
+  transform: rotate(1.5deg);
+  background: linear-gradient(145deg, #c4b5fd 0%, #67e8f9 48%, rgba(167,139,250,.18) 100%);
+  box-shadow: 0 0 0 1px rgba(196,181,253,.18), 0 28px 90px rgba(69,53,166,.35), 0 0 70px rgba(103,232,249,.12);
+}
+.hero-profile-frame::after {
+  content: "";
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  z-index: -2;
+  border: 1px solid rgba(103,232,249,.22);
+  border-radius: 34px;
+  transform: rotate(-4deg);
+}
+.hero-profile-image {
+  object-position: center 28%;
+  filter: saturate(1.04) contrast(1.03);
+}
+.hero-profile-caption {
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  border-color: rgba(196,181,253,.28);
+}
+.hero-orbit-one { width: min(112%, 480px); border-color: rgba(167,139,250,.30); }
+.hero-orbit-two { width: min(96%, 405px); }
+.hero-float-top { top: 9%; right: -1%; }
+.hero-float-bottom { bottom: 13%; left: -5%; }
+.hero-visual-label { bottom: 1%; right: 4%; }
+@media(max-width:850px) {
+  .hero-visual { min-height: 420px; }
+  .hero-profile-frame { width: min(65%, 300px); }
+  .hero-float-top { right: 3%; }
+  .hero-float-bottom { left: 1%; }
+}
+@media(max-width:520px) {
+  .hero-visual { min-height: 350px; }
+  .hero-profile-frame { width: 63%; }
+  .hero-float-top { top: 6%; right: -1%; }
+  .hero-float-bottom { bottom: 10%; left: -1%; }
+  .hero-visual-label { right: 2%; font-size: .55rem; }
+}
