@@ -100,3 +100,25 @@ footer h3, footer h4 { color: #c4b5fd !important; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
   #vanta-bg { display: none; }
 }
+
+/* Reliability/accessibility pass: never hide content if reveal scripts fail. */
+section { opacity: 1 !important; transform: none !important; }
+section.visible { opacity: 1 !important; transform: none !important; }
+.welcome-message {
+  max-width: 1000px; margin: 26px auto !important; padding: 22px 20px !important;
+  color: #e8eaff !important; background: transparent !important;
+  -webkit-background-clip: initial !important; background-clip: initial !important;
+  font-size: clamp(1rem, 2.3vw, 1.35rem) !important; font-weight: 500 !important;
+  line-height: 1.7; box-shadow: none !important; animation: none !important;
+}
+.news-ticker { border: 1px solid rgba(167,139,250,.14); }
+a { text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 3px solid #67e8f9 !important; outline-offset: 3px;
+}
+@media (max-width: 460px) {
+  nav { position: relative; }
+  nav ul { justify-content: flex-start; }
+  nav ul li a { font-size: .78rem; }
+  .welcome-message { margin: 14px auto !important; }
+}
