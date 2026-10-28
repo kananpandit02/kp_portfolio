@@ -531,8 +531,18 @@ footer { padding-left: max(20px, env(safe-area-inset-left)) !important; padding-
 }
 
 
-/* Guard against embedded/zoomed viewports narrower than a usable mobile layout. */
+/* Keep the document root from collapsing inside extremely narrow embedded/zoomed viewports. */
 @media (max-width: 319px) {
-  html, body { min-width: 320px; }
-  body { overflow-x: auto; }
+  html {
+    width: 100%;
+    min-width: 320px !important;
+    max-width: none !important;
+    overflow-x: auto !important;
+  }
+  body {
+    width: 320px !important;
+    min-width: 320px !important;
+    max-width: none !important;
+    overflow-x: visible !important;
+  }
 }
