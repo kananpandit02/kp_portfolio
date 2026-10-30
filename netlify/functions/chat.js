@@ -133,11 +133,11 @@ function offlineReply(message) {
     },
     {
       match: /\b(experience|rezolve|job|role|work at|career)\b/,
-      reply: "Kanan works as an AI/ML Engineer at Rezolve AI. He joined as an intern in January 2026 and moved into a full-time role in April 2026. His work includes applied and agentic AI, conversational and voice-based experiences, agent workflows, and reliability improvements. I can only share this high-level public summary."
+      reply: "Kanan works as an AI Engineer at Rezolve AI, where he moved from an internship (January–April 2026) into a full-time role. His contributions span a voice-first food-ordering assistant, a multi-agent hospitality concierge, a retail conversational shopping assistant, a multimodal voice-and-chat assistant, avatar R&D, and AI platform API quality testing. His work includes LangGraph agent workflows, voice pipelines, backend integrations, reliability engineering and end-to-end testing. Client and internal project names are intentionally anonymised."
     },
     {
       match: /\b(skill|tech stack|technology|technologies|programming|framework)\b/,
-      reply: "Kanan's technical toolkit includes Python, SQL, PyTorch, TensorFlow, scikit-learn, Hugging Face Transformers, SentenceTransformers, FAISS, OpenCV, Apache Spark/PySpark, H2O, Neo4j, NetworkX, DGL, Git, and Linux. His focus areas include ML/DL, NLP, computer vision, RAG, embeddings, and AI agents."
+      reply: "Kanan's technical toolkit spans Python, TypeScript, JavaScript, SQL, LangGraph, LangChain, Pipecat, LiveKit, WebRTC, Twilio, FastAPI, Django REST, React, PostgreSQL, MongoDB, Redis, Weaviate, FAISS, mem0, Azure OpenAI, OpenAI, Anthropic, Groq, AssemblyAI, Deepgram, ElevenLabs, Cartesia, Langfuse, Sentry, Docker, Kubernetes/Helm, GitHub Actions, pytest and Playwright."
     },
     {
       match: /\b(education|degree|university|college|study|studied|qualification)\b/,
@@ -145,7 +145,7 @@ function offlineReply(message) {
     },
     {
       match: /\b(project|portfolio|built|developed|research)\b/,
-      reply: "Projects in Kanan's portfolio include a GraphRAG multi-document question-answering system using BM25, FAISS, and Neo4j; distributed wildfire confidence prediction with H2O; gesture-based smart control using OpenCV and MediaPipe; CycleGAN image transformation; and EMNIST handwritten-character classification. He has also explored hospitality and conversational-commerce AI prototypes."
+      reply: "Kanan's professional project experience includes an anonymised voice-first food-ordering assistant with menu, cart and loyalty agents; a multi-agent hospitality concierge; a retail conversational shopping assistant; a multimodal voice-and-chat assistant; real-time avatar technology R&D; and an AI platform API test campaign. His academic projects include GraphRAG question answering, H2O wildfire prediction, gesture-based control, CycleGAN image transformation and EMNIST classification."
     },
     {
       match: /\b(contact|email|linkedin|github|reach|connect)\b/,
@@ -153,7 +153,7 @@ function offlineReply(message) {
     },
     {
       match: /\b(voice|speech|concierge|hospitality|conversational)\b/,
-      reply: "Kanan has experience contributing to hospitality-oriented voice concierge workflows and conversational AI experiences. His broader work includes agent workflows, voice-based interactions, and improving reliability. I can share only a high-level description, not confidential client or internal implementation details."
+      reply: "Kanan has contributed to real-time voice AI systems using Pipecat, LiveKit, WebRTC and speech services. His work includes speech recognition and synthesis integrations, VAD tuning, turn-taking, noise-suppression evaluation, conversational agent orchestration, guest-service workflows and voice experience reliability. Client and internal project names are kept confidential."
     },
     {
       match: /\b(private|personal|age|salary|phone number|home address|family)\b/,
