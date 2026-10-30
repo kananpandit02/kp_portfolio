@@ -80,7 +80,6 @@ function jsonResponse(statusCode, reply) {
 
 function offlineReply(message) {
   const q = message.toLowerCase();
-  const note = " (KAI is using its built-in profile because the live AI service is temporarily unavailable.)";
   const answers = [
     {
       match: /\b(who is|who's|about kanan|tell me about kanan|introduce kanan|profile)\b/,
@@ -117,7 +116,7 @@ function offlineReply(message) {
   ];
 
   const found = answers.find(item => item.match.test(q));
-  return (found ? found.reply : "I can answer basic questions about Kanan's profile, Rezolve AI experience, technical skills, education, projects, and public contact links. Try asking about one of those topics.") + note;
+  return (found ? found.reply : "I can answer basic questions about Kanan's profile, Rezolve AI experience, technical skills, education, projects, and public contact links. Try asking about one of those topics.");
 }
 
 function safeTrack(trace, reply, model) {
