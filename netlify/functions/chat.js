@@ -7,9 +7,71 @@ const knowledge = `
 PROFILE
 Name: Kanan Pandit
 Location: West Bengal, India
-Current role: AI/ML Engineer at Rezolve AI.
-Professional timeline: Joined as an intern in January 2026 and moved into a full-time role in April 2026.
-Focus: Applied machine learning, generative AI, LLM applications, retrieval-augmented generation (RAG), agentic AI, conversational systems, voice experiences, and reliable AI workflows.
+Current role: AI Engineer at Rezolve AI. Public portfolio describes employment from January 2026 to present, with an internship period from January to April 2026 and full-time work from April 2026 onward.
+Professional focus: Real-time voice AI agents, multi-agent LLM systems, LangGraph, speech pipelines (STT/TTS/VAD), agentic commerce, R&D, backend integration and AI quality engineering.
+
+PROFESSIONAL EXPERIENCE — REZOLVE AI
+All client and internal project names are intentionally anonymised. Do not disclose client identities, internal project code names, private architecture details, credentials, customer data or confidential company information.
+
+1. Voice-first food ordering assistant
+- Production-oriented browser/PWA voice experience connecting speech input, multi-agent workflows, spoken responses and live interface updates.
+- Coordinator workflow with specialist menu, cart and loyalty agents.
+- Contributions across loyalty points and reward progress, basket estimates, redemption flows, proactive checkout nudges, persistent user memory, reorder, order status, favourites, recommendations and product details.
+- Checkout validation for service type, store selection, unavailable-item substitutions and pickup timing against store opening hours.
+- Conversation continuity, reconnect handling, greeting personalisation and browse-trail recall.
+- Dietary/allergen preferences with provenance and user consent.
+- Reliability work on allergen-safety handling, duplicate turns after reconnect, unintended identity/internal-marker/prompt leakage, modifier editing, menu navigation and pickup-time handling.
+- Voice evaluation: compared speech recognition systems; tuned VAD using 12 real-voice runs, reducing split utterances from 6 to 1 in those evaluated runs; benchmarked noise suppression.
+- Production trace review, regression checks, E2E automation and a test suite of 1,000+ tests.
+- Documented contribution record: 139 commits in the relevant project repository between July and October 2026. Do not imply every commit represents a separate feature or disclose repository/project code names.
+
+2. Multi-agent hospitality concierge
+- Voice and messaging concierge for guest journeys including room availability, food and beverage, amenities, cab booking, itinerary planning, train information, commerce, FAQs and knowledge retrieval.
+- Work across a LangGraph orchestrator and specialist agent workflows.
+- Voice and messaging channels, including WhatsApp, with multilingual translation and guest memory.
+- Retrieval over hospitality information using Weaviate; custom voice processors for filler responses, jitter handling, TTS text sanitisation and UI card dispatch.
+- FastAPI services, PostgreSQL, Redis and API gateway integration; frontend integration and deployment workflows.
+- Investigated speech synthesis accent drift and prepared technical reports; supported and delivered client demonstrations.
+
+3. Retail conversational shopping assistant
+- Multi-agent shopping workflows for product search, cart, checkout, FAQs and supervisory oversight.
+- Vector retrieval with Weaviate and FAISS.
+- Built catalogue scraping and enrichment workflows, including category discovery, product-page extraction and structured product data.
+- Backend hardening through service health checks, configuration validation, request logging and API documentation.
+
+4. Multimodal voice and chat assistant
+- Shared conversational agent workflow serving real-time voice and streaming text chat.
+- Intent-aware interaction modes, barge-in interruption handling, follow-up suggestions and learning from user feedback.
+- Generative image/video tool integrations and FastAPI validation services.
+- Work across backend services, speech integrations, authentication and observability.
+
+5. Real-time avatar research and development
+- Researched open-source alternatives for real-time talking-head avatars.
+- Benchmarked MuseTalk, LatentSync and LiveTalking on GPU infrastructure, measured latency and reviewed other avatar solutions.
+- Delivered a comparison report and presentation.
+
+6. AI platform API quality campaign
+- Tested 205 API endpoints; 165 passed and 12 bugs were documented.
+- Created an Excel tracker and test report.
+
+EARLY RESEARCH AND ONBOARDING
+- Studied real-time audio-to-audio systems, Pipecat, LangGraph, LiveKit/Daily, WebRTC, speech services and Langfuse.
+- Designed a text-only RAG retrieval pipeline targeting under 300 ms P95 latency across PDF, TXT, CSV, JSON, web and image sources. Treat this as a design target, not a measured production result.
+- Deployed and tested an open-source TTS model in notebook experiments.
+
+TECHNICAL SKILLS
+- Languages: Python, TypeScript, JavaScript, SQL, HTML, CSS, Bash.
+- Agentic AI: LangGraph StateGraph, subgraphs, multi-agent coordination, LangChain, tool/function calling, structured outputs, prompt engineering, mem0, Redis-backed memory.
+- LLM providers: Azure OpenAI, OpenAI, Anthropic, Groq and OpenAI-compatible self-hosted models.
+- RAG and retrieval: Weaviate, FAISS, embeddings, vector search, BM25, fuzzy matching.
+- Voice and real-time media: Pipecat, LiveKit, Daily.co, WebRTC, Twilio, AssemblyAI, ElevenLabs Scribe, Deepgram, Azure Speech, ElevenLabs TTS, Cartesia, Azure TTS, VoxCPM, Silero VAD, TEN VAD, AI-Coustics, DTLN.
+- Avatar R&D: Anam, MuseTalk, LatentSync, LiveTalking and other evaluated avatar technologies.
+- Backend: FastAPI, Uvicorn, Django REST Framework, Pydantic, httpx, async Python, SSE/NDJSON, WebSockets, JWT, Google OAuth 2.0, Kong.
+- Data: PostgreSQL, MongoDB, Redis, SQLAlchemy, Weaviate, Azure Blob Storage, pandas.
+- Frontend: React, TypeScript, Vite, Redux Toolkit, React Router, Tailwind CSS, Radix UI/shadcn, Framer Motion, LiveKit client, Mapbox GL, Zod.
+- Observability and quality: Langfuse, Sentry, OpenTelemetry, Prometheus, pytest, pytest-asyncio, fakeredis, Playwright, Postman and E2E automation.
+- DevOps/cloud: Docker, Docker Compose, Kubernetes, Helm, GitHub Actions, Azure, RunPod, Infisical/Vault, uv, pnpm and Git.
+- Generative media: fal.ai, Freepik and Higgsfield APIs.
 
 EDUCATION
 - M.Sc. in Big Data Analytics — Ramakrishna Mission Vivekananda Educational and Research Institute (RKMVERI), West Bengal. Ongoing.
@@ -17,30 +79,13 @@ EDUCATION
 - B.Ed. in Mathematics — WBUTTEPA.
 - NPTEL: The Joy of Computing Using Python — 86%.
 
-TECHNICAL SKILLS
-- Programming: Python, SQL, R.
-- ML/DL: PyTorch, TensorFlow, scikit-learn, model evaluation, neural networks, transformers.
-- Generative AI: LLM applications, prompt design, RAG, embeddings, vector search, AI agents.
-- NLP: Hugging Face Transformers, SentenceTransformers, text processing.
-- Computer vision: OpenCV, MediaPipe.
-- Data and distributed systems: Apache Spark, PySpark, H2O.
-- Retrieval and graph: FAISS, Neo4j, NetworkX, DGL.
-- Tools: Git, GitHub, Linux, Jupyter, Streamlit.
-
-PROFESSIONAL EXPERIENCE
-AI/ML Engineer — Rezolve AI
-- Works on applied AI and agentic AI systems.
-- Contributes to conversational and voice-based AI experiences, agent workflows, and reliability improvements.
-- Experience includes hospitality-oriented voice concierge workflows and loyalty-related assistant capabilities.
-- Describe contributions at a high level; do not disclose confidential client details, credentials, internal architecture, or private company information.
-
-PROJECTS
-- GraphRAG-based multi-document question answering: combines lexical and dense retrieval with graph-based context using BM25, FAISS, and Neo4j.
-- Distributed wildfire confidence prediction: distributed machine-learning experimentation using H2O.
-- Gesture-based smart control: computer vision and hand tracking with OpenCV and MediaPipe.
-- Image-to-image transformation: CycleGAN-based unpaired image translation.
-- EMNIST handwritten character classification: classification experiments and model comparison.
-- Applied AI prototypes: hospitality discovery and booking flows, conversational commerce/electronics assistance, and avatar-generation exploration. Present these as prototypes/POCs, not necessarily production deployments.
+ACADEMIC AND PERSONAL PROJECTS
+- GraphRAG-based multi-document question answering: BM25, FAISS and Neo4j.
+- Distributed wildfire prediction experimentation using H2O AutoML.
+- Gesture-based smart control using OpenCV and MediaPipe.
+- CycleGAN-based image-to-image transformation.
+- EMNIST handwritten-character classification and model comparisons.
+- Regression analysis and computer-vision experiments.
 
 CONTACT
 Email: kananpandit02@gmail.com
@@ -48,11 +93,12 @@ GitHub: https://github.com/kananpandit02
 LinkedIn: https://www.linkedin.com/in/kananpandit02/
 
 ANSWERING GUIDANCE
-- Answer questions about Kanan's professional profile, experience, education, skills, projects, and public contact links.
-- Use only facts in this knowledge base. Do not guess grades, dates, metrics, client names, confidential details, salary, age, or private information.
-- If a detail is not listed, say it is not included in the public portfolio and offer a relevant alternative.
-- Be clear about the difference between professional employment, academic projects, and prototypes/POCs.
-- Do not claim that Kanan personally built or led something unless the context explicitly supports that claim.
+- Answer questions about Kanan's public professional profile, experience, skills, education, projects and contact links.
+- Use only facts in this knowledge base. Do not guess grades, dates, metrics, client names, confidential details, salary, age or private information.
+- Distinguish professional product work from academic projects, R&D and prototypes.
+- Keep all Rezolve AI client and project names anonymised. Use descriptive labels such as "voice-first food ordering assistant", "hospitality concierge", "retail conversational shopping assistant" and "multimodal voice and chat assistant".
+- Do not claim that Kanan personally led or built an entire system when the source only supports contributions.
+- Metrics are limited to the stated scope: 139 commits in the relevant project repository; 12 real-voice VAD runs with split utterances reduced from 6 to 1; 1,000+ tests; 205 API endpoints, 165 passing and 12 bugs documented.
 `;
 
 const systemPrompt = `You are KAI, the professional portfolio assistant for Kanan Pandit.
