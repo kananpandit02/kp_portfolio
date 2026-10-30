@@ -77,6 +77,49 @@ function jsonResponse(statusCode, reply) {
   };
 }
 
+
+function offlineReply(message) {
+  const q = message.toLowerCase();
+  const note = " (KAI is using its built-in profile because the live AI service is temporarily unavailable.)";
+  const answers = [
+    {
+      match: /\b(who is|who's|about kanan|tell me about kanan|introduce kanan|profile)\b/,
+      reply: "Kanan Pandit is an AI/ML Engineer at Rezolve AI based in West Bengal, India. His work focuses on applied machine learning, generative AI, LLM applications, RAG, agentic AI, conversational systems, and voice experiences. He has an academic background in mathematics and big data analytics."
+    },
+    {
+      match: /\b(experience|rezolve|job|role|work at|career)\b/,
+      reply: "Kanan works as an AI/ML Engineer at Rezolve AI. He joined as an intern in January 2026 and moved into a full-time role in April 2026. His work includes applied and agentic AI, conversational and voice-based experiences, agent workflows, and reliability improvements. I can only share this high-level public summary."
+    },
+    {
+      match: /\b(skill|tech stack|technology|technologies|programming|framework)\b/,
+      reply: "Kanan's technical toolkit includes Python, SQL, PyTorch, TensorFlow, scikit-learn, Hugging Face Transformers, SentenceTransformers, FAISS, OpenCV, Apache Spark/PySpark, H2O, Neo4j, NetworkX, DGL, Git, and Linux. His focus areas include ML/DL, NLP, computer vision, RAG, embeddings, and AI agents."
+    },
+    {
+      match: /\b(education|degree|university|college|study|studied|qualification)\b/,
+      reply: "Kanan has a B.Sc. in Mathematics (Honours) from Vidyasagar University, a B.Ed. in Mathematics from WBUTTEPA, and is pursuing an M.Sc. in Big Data Analytics at Ramakrishna Mission Vivekananda Educational and Research Institute (RKMVERI). He also scored 86% in NPTEL's The Joy of Computing Using Python."
+    },
+    {
+      match: /\b(project|portfolio|built|developed|research)\b/,
+      reply: "Projects in Kanan's portfolio include a GraphRAG multi-document question-answering system using BM25, FAISS, and Neo4j; distributed wildfire confidence prediction with H2O; gesture-based smart control using OpenCV and MediaPipe; CycleGAN image transformation; and EMNIST handwritten-character classification. He has also explored hospitality and conversational-commerce AI prototypes."
+    },
+    {
+      match: /\b(contact|email|linkedin|github|reach|connect)\b/,
+      reply: "You can contact Kanan at kananpandit02@gmail.com. GitHub: https://github.com/kananpandit02. LinkedIn: https://www.linkedin.com/in/kananpandit02/."
+    },
+    {
+      match: /\b(voice|speech|concierge|hospitality|conversational)\b/,
+      reply: "Kanan has experience contributing to hospitality-oriented voice concierge workflows and conversational AI experiences. His broader work includes agent workflows, voice-based interactions, and improving reliability. I can share only a high-level description, not confidential client or internal implementation details."
+    },
+    {
+      match: /\b(private|personal|age|salary|phone number|home address|family)\b/,
+      reply: "I can help with Kanan's public professional information, but I don't provide private personal details. You can ask about his experience, skills, education, projects, or public contact links."
+    }
+  ];
+
+  const found = answers.find(item => item.match.test(q));
+  return (found ? found.reply : "I can answer basic questions about Kanan's profile, Rezolve AI experience, technical skills, education, projects, and public contact links. Try asking about one of those topics.") + note;
+}
+
 function safeTrack(trace, reply, model) {
   if (!trace) return;
   try {
@@ -123,7 +166,7 @@ export async function handler(event) {
     const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
       console.error("KAI configuration error: OPENROUTER_API_KEY is missing.");
-      return jsonResponse(503, "KAI is temporarily unavailable because the AI service is not configured. Please try again later or contact Kanan directly.");
+      return jsonResponse(200, offlineReply(message));
     }
 
     if (process.env.LANGFUSE_PUBLIC_KEY && process.env.LANGFUSE_SECRET_KEY) {
@@ -169,19 +212,13 @@ export async function handler(event) {
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
       console.error("OpenRouter request failed:", response.status, data?.error?.message || "No provider error detail");
-      if (response.status === 401 || response.status === 403) {
-        return jsonResponse(502, "KAI couldn't authenticate with its AI provider. Please try again later.");
-      }
-      if (response.status === 429) {
-        return jsonResponse(503, "KAI is receiving too many requests right now. Please wait a moment and try again.");
-      }
-      return jsonResponse(502, "KAI's AI service is temporarily unavailable. Please try again in a little while.");
+      return jsonResponse(200, offlineReply(message));
     }
 
     const reply = data?.choices?.[0]?.message?.content;
     if (typeof reply !== "string" || !reply.trim()) {
       console.error("OpenRouter returned no message content:", JSON.stringify(data).slice(0, 1200));
-      return jsonResponse(502, "KAI couldn't generate a response this time. Please rephrase your question and try again.");
+      return jsonResponse(200, offlineReply(message));
     }
 
     safeTrack(trace, reply, MODEL);
@@ -192,9 +229,9 @@ export async function handler(event) {
     }
     console.error("KAI handler error:", error.name, error.message);
     if (error.name === "AbortError") {
-      return jsonResponse(504, "KAI is taking longer than expected. Please try again.");
+      return jsonResponse(200, offlineReply(message || ""));
     }
-    return jsonResponse(500, "Something went wrong while KAI was preparing a response. Please try again.");
+    return jsonResponse(200, offlineReply(message || ""));
   } finally {
     if (langfuse) {
       try { await langfuse.flush(); } catch (error) {
